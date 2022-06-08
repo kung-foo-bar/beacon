@@ -11,6 +11,7 @@ CREATE TABLE Issues(
    issue_type TEXT NOT NULL,
    creator_id TEXT NOT NULL,
    asignee_id TEXT NOT NULL,
+   votes INT NOT NULL,
    CONSTRAINT fk_creator_id
       FOREIGN KEY(creator_id)
          REFERENCES Users(user_id)
