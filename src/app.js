@@ -3,24 +3,25 @@ import express, { json } from 'express';
 import expressLayouts  from 'express-ejs-layouts';
 import {dirname} from 'path';
 import {fileURLToPath} from 'url';
+import 'dotenv/config';
 import process from 'node:process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8000;
 
 // Static Files
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.use('/img', express.static(__dirname + 'public/img'));
 
 // Set Views | Templating Engine
-app.use(expressLayouts)
-app.set('layout', './pages/_landing')
-app.set('view engine', 'ejs')
+app.use(expressLayouts);
+app.set('layout', './pages/_landing');
+app.set('view engine', 'ejs');
 
 // Navigation | Route to pages
 app.get('', (req, res) => {
-  res.render('landing', { title: 'Homepage'})
+  res.render('landing', { title: 'Homepage'});
 })
 
 // -------- any other pages should be set below here --------

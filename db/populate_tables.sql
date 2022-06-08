@@ -5,5 +5,5 @@ INSERT INTO Users(user_id,ph_number)
           ('LE BOSS'  ,'111392092'),
           ('MF DOOM'  ,'489027239');
 
-INSERT INTO Issues(msg,log_time,issue_type,creator_id,asignee_id)
-   VALUES ('coke machine broke','2021-4-4 01:00:00','INFRASTRUCTURE','SupaVilan','MF DOOM');
+INSERT INTO Issues(msg,log_time,issue_type,creator_id,asignee_id,votes)
+   VALUES ('coke machine broke','2021-4-4 01:00:00','INFRASTRUCTURE','SupaVilan','MF DOOM',13);
