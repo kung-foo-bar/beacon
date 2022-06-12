@@ -21,3 +21,7 @@ export function close_db(pool){
    pool.end();
 }
 
+export function run_query(pool,query){
+   
+}
+
