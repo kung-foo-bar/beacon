@@ -4,7 +4,9 @@
   left: 0;
   width: 100%;
 }
-
+.container{
+  border-bottom: 1px solid white;
+}
 .navbar {
   position: relative;
   padding: 20px 0;
@@ -24,7 +26,7 @@
   padding: 10px 0;
   font-size: 18px;
   font-weight: 400;
-  color: #49525a;
+  color: white;
 }
 
 .navbar-nav .nav-item .nav-link.active,
