@@ -29,7 +29,7 @@ app.set('view engine', 'ejs');
 
 // Navigation | Route to pages
 app.get('', (req, res) => {
-  res.render('landing', { title: 'Homepage'});
+  res.render('landing', { layout:'./pages/_landing',title: 'Homepage'});
 })
 app.get('/about', (req, res) => {
   res.render('about', { layout: './pages/_about', title: 'About' })
@@ -46,6 +46,18 @@ app.get('/donate', (req, res) => {
 app.get('/faq', (req, res) => {
   res.render('faq', { layout: './pages/_faq', title: 'FAQs' })
 })
+
+app.get('/report', (req, res) => {
+  res.render('report', { layout:'./pages/_report',  title: 'Report/Request'});
+})
+// -------- any other pages should be set below here --------
+
+// app.get('/about', (req, res) => {
+//   res.render('about', { layout: './layouts/_about', title: 'About' })
+// })
+// app.get('/contact', (req, res) => {
+//   res.render('contact', { layout: './layouts/_contact', title: 'Contact Page' })
+// })
 
 app.post('/issues',json_parser,(req,res) => {
   let oldest = new Date();
