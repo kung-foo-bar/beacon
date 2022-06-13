@@ -6,12 +6,14 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE Issues(
+   title TEXT NOT NULL,
    msg TEXT NOT NULL,
    log_time TIMESTAMP NOT NULL,
    issue_type TEXT NOT NULL,
    creator_id TEXT NOT NULL,
    asignee_id TEXT NOT NULL,
    votes INT NOT NULL,
+   PRIMARY KEY (title,creator_id,asignee_id),
    CONSTRAINT fk_creator_id
       FOREIGN KEY(creator_id)
          REFERENCES Users(user_id)
