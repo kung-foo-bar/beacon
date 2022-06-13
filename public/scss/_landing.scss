@@ -41,8 +41,7 @@
     font-size: large;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 10px;
-    margin-bottom: 10%;
-    
+    margin-bottom: 10%;    
 }
 #filters button{
     color: white;
@@ -53,6 +52,9 @@
     padding: 0.875rem 3rem;
     border-radius: 2rem;
     outline: none;
+}
+#filter button a{
+    color: white;
 }
 #filters p:hover, #navigation_profile p:hover{
     background-color: gray;

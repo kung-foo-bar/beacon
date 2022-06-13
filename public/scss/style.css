@@ -150,6 +150,10 @@ a {
   outline: none;
 }
 
+#filter button a {
+  color: white;
+}
+
 #filters p:hover, #navigation_profile p:hover {
   background-color: gray;
   border-radius: 10%;

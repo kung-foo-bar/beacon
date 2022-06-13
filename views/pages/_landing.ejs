@@ -86,7 +86,41 @@
 
 <!-- My Script -->
     <script>
+      // Getting Dom elements
+      let waterFilterButton = document.getElementById("water_filter");
+      let foodFilterButton = document.getElementById("food_filter");
+      let wasteFilterButton = document.getElementById("waste_filter");
+      let transportFilterButton = document.getElementById("transport_filter");
+      let crimeFilterButton = document.getElementById("crime_filter");
 
+      let filterButtons = document.querySelectorAll(".filterButtons");
+
+      //Add event listeners
+      filterButtons.forEach(filterButton =>{ // Query for post with a certain #hashtag
+        filterButton.addEventListener('click', (e)=>{
+          let hashtag = filterButton.id; //hashtag to be Queried for
+
+          //============================== Create Request ==================================
+          const xhttp = new XMLHttpRequest();
+
+          xhttp.open("POST", "", true);
+
+          xhttp.setRequestHeader("Accept", "application/json");
+          xhttp.setRequestHeader('Content-type', 'application/json');
+
+          xhttp.onload = function () {
+            let res = JSON.parse(this.responseText) 
+            console.log(res)
+          }
+
+          let req = {
+            category: hashtag,
+          }
+
+          // Send data
+          xhttp.send(JSON.stringify(req));
+        })
+      })
     </script>
 </body>
 </html>
