@@ -55,6 +55,10 @@ app.post('',jsonParser,(req,res)=>{
   console.log(req.body);
   res.send(JSON.stringify(req.body));
 });
+app.post('/rr',jsonParser,(req,res)=>{
+  console.log(req.body);
+  res.send(JSON.stringify(req.body));
+});
 
 // app.get('/report', (req, res) => {
 //   res.render('report', { layout:'./pages/_report',  title: 'Report/Request'});
