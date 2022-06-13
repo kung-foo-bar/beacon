@@ -21,9 +21,12 @@ app.set('view engine', 'ejs');
 
 // Navigation | Route to pages
 app.get('', (req, res) => {
-  res.render('landing', { title: 'Homepage'});
+  res.render('landing', { layout:'./pages/_landing',title: 'Homepage'});
 })
 
+app.get('/report', (req, res) => {
+  res.render('report', { layout:'./pages/_report',  title: 'Report/Request'});
+})
 // -------- any other pages should be set below here --------
 
 // app.get('/about', (req, res) => {

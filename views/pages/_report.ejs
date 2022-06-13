@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+  
   <!-- Style CSS -->
   <link rel="stylesheet" href="../scss/style.css">
   <title>
@@ -31,13 +32,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/report">Report/ Request</a>
+                  <a class="nav-link active" aria-current="page"href="/report">Report/ Request</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Donate</a>
@@ -80,5 +81,49 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+
+
+    
+    <script>
+      class Post {
+        constructor(_firstName, _lastName, _address, _phoneNumber, _description){
+          this.firstName = _firstName;
+          this.lastName = _lastName;
+          this.address = _address;
+          this.phoneNumber = _phoneNumber;
+          this.description = _description;
+        }
+      }
+      //========================  Getting Dom Elements
+      let categories = document.querySelectorAll(".categories");
+      let title = document.getElementById("content_title");
+      let form = document.getElementById("form_info");
+
+
+      //======================== Adding event listiners
+      // change Title on card
+      categories.forEach(item => {
+        item.addEventListener('click', event =>{
+          title.innerHTML = item.innerHTML;
+        })
+      });
+
+      //======================== Getting form infromation
+      //putting info into an Object on Submittion
+      document.querySelector('form').addEventListener('submit', (e) => {
+        const data = Object.fromEntries(new FormData(e.target).entries());
+        console.log(data)
+
+        //stop form from reloading the page
+        e.preventDefault();
+        e.stopImmediatePropagation()
+
+        //Reset the form inputs to be empty
+        form.reset()
+      })
+    </script>
+
+
+
 </body>
 </html>
