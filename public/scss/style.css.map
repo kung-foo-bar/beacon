@@ -6,7 +6,7 @@
         "_globals.scss",
         "_navbar.scss",
         "_landing.scss",
-        "_report.scss"
+        "_rr.scss"
     ],
     "names": [],
     "file": "style.css"
