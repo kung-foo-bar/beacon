@@ -1,4 +1,5 @@
 export const PG_ERR_DUP = Symbol('input was a duplicate key');
-get_db_err(err){
+export const PG_ERR_NONE = Symbol('everything is okay');
+export function get_db_err(err){
    if(err.detail.includes("Key") && err.detail.includes("already exists")) return PG_ERR_DUP;
 }

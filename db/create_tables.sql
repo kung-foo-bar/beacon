@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS Users, Issues CASCADE;
+DROP TABLE IF EXISTS Users,Votes, Issues CASCADE;
 
 CREATE TABLE Users(
    user_id TEXT PRIMARY KEY,
@@ -12,7 +12,6 @@ CREATE TABLE Issues(
    issue_type TEXT NOT NULL,
    creator_id TEXT NOT NULL,
    asignee_id TEXT NOT NULL,
-   votes INT NOT NULL,
    PRIMARY KEY (title,creator_id,asignee_id),
    CONSTRAINT fk_creator_id
       FOREIGN KEY(creator_id)
@@ -25,3 +24,22 @@ CREATE TABLE Issues(
          ON DELETE SET NULL
 
 );
+
+CREATE TABLE Votes(
+   post_title TEXT NOT NULL,
+   post_creator_id TEXT NOT NULL,
+   post_asignee_id TEXT NOT NULL,
+   voter_id   TEXT NOT NULL, 
+   
+   UNIQUE(post_title,post_creator_id,post_asignee_id,voter_id),
+
+   FOREIGN KEY (post_title,post_creator_id,post_asignee_id)
+      REFERENCES Issues(title,creator_id,asignee_id)
+      ON DELETE CASCADE,
+   
+   FOREIGN KEY (voter_id)
+      REFERENCES Users(user_id)
+      ON DELETE CASCADE
+);
+
+

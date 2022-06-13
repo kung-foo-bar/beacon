@@ -29,14 +29,14 @@ export function test_db(){
    res = issues_db.insert_issues(handle,issue);
    res.then(rows => {console.log(rows.data); rows.client.release()})
       .catch((err) => {log_pg_err(err)});
-
-   res = issues_db.add_votes(handle,issue,1);
-   res.then(rows => {console.log(rows.data); rows.client.release()})
-      .catch((err) => {console.log(err);log_pg_err(err)});
-
-   res = issues_db.delete_issue(handle,issue);
-   res.then(rows => {console.log(rows.data); rows.client.release()})
-      .catch((err) => {console.log(err);log_pg_err(err)});
+   /*
+   res = issues_db.add_votes(handle,issue,'Paigen');
+   res.then(rows => {
+      console.log(rows.data); 
+      rows.client.release();
+      test_count_votes(handle,issue);
+   }).catch((err) => {test_count_votes(handle,issue);log_pg_err(err)});
+   
    
    let too_far_forward = new Date("1/1/2099");
    res = issue_server.get_within_period(handle,too_far_forward);
@@ -44,7 +44,22 @@ export function test_db(){
       assert.deepEqual(rows.data.length,0);
       rows.client.release();
    })
-   .catch((err) => log_pg_err(err));
+   .catch((err) => log_pg_err(err));*/
+}
+
+function test_delete(pool,issue){
+   return issues_db.delete_issue(pool,issue);
+}
+
+function test_count_votes(pool,issue){
+   let res_votes =  issues_db.count_votes(pool,issue);
+   res_votes.then(rows => {
+      console.log(rows.data);
+      assert.deepEqual(rows.data[0].n_votes,1);
+      rows.client.release();
+      test_delete(pool,issue);
+   })
+   .catch((err) => {log_pg_err(err)});
 }
 
 export function log_pg_err(err){
@@ -56,4 +71,4 @@ export function log_pg_err(err){
 }
 
 
-//test_db();
+test_db();
