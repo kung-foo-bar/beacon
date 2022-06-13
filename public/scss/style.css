@@ -81,6 +81,10 @@ a {
   opacity: 1;
 }
 
+.logo-img {
+  border-radius: 100%;
+}
+
 #screen {
   display: -webkit-box;
   display: -ms-flexbox;
