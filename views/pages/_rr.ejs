@@ -115,7 +115,22 @@
       //putting info into an Object on Submittion
       document.querySelector('form').addEventListener('submit', (e) => {
         const data = Object.fromEntries(new FormData(e.target).entries());
-        console.log(data)
+
+        //============================== Create Request ==================================
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "/rr", true);
+
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader('Content-type', 'application/json');
+
+        xhttp.onload = function () {
+          let res = JSON.parse(this.responseText) 
+          console.log(data)
+        }
+
+        // Send data
+        xhttp.send(JSON.stringify(data));
 
         //stop form from reloading the page
         e.preventDefault();

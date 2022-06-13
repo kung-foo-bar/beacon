@@ -15,6 +15,11 @@ import * as db_common from './db_common.js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = process.env.PORT || 8000;
+
+// Caleb added just cuz... -\('_')/-
+let urlEncodedParser = bodyParser.urlencoded({extended: true});
+let jsonParser = bodyParser.json();
+
 let pool = db_host.open_db();
 
 let json_parser = bodyParser.json();
@@ -46,6 +51,14 @@ app.get('/donate', (req, res) => {
 app.get('/faq', (req, res) => {
   res.render('faq', { layout: './pages/_faq', title: 'FAQs' })
 })
+app.post('',jsonParser,(req,res)=>{
+  console.log(req.body);
+  res.send(JSON.stringify(req.body));
+});
+app.post('/rr',jsonParser,(req,res)=>{
+  console.log(req.body);
+  res.send(JSON.stringify(req.body));
+});
 
 // app.get('/report', (req, res) => {
 //   res.render('report', { layout:'./pages/_report',  title: 'Report/Request'});
