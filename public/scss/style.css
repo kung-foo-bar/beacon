@@ -273,12 +273,6 @@ button,
 
 /*# sourceMappingURL=style.css.map */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .row {
     display: flex;
     align-items: center;
@@ -289,15 +283,6 @@ button,
 .col-1 {
     flex-basis: 50%;
     min-width: 300px;
-}
-
-.form_box {
-    width: 300px;
-    height: 400px;
-    position: relative;
-    top: 50px;
-    left: 120px;
-    background: rgba(0, 0, 0, 0.6);
 }
 
 .form_box {
