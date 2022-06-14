@@ -19,12 +19,14 @@ async function make_test_data(pool){
    let db_res = await issues_query.insert_issues(pool,test_issue);
    console.log(db_res.data);
    assert.deepEqual(db_res.data.length,1);
+   db_res.client.release();
 }
 
 
 async function should_delete_test_data(pool){
    let db_res = await issues_query.delete_issue(pool,test_issue);
    assert.deepEqual(db_res.data.length,1);
+   db_res.client.release();
 }
 
 async function delete_test_data(pool){
@@ -37,17 +39,22 @@ async function delete_test_data(pool){
 async function should_add_vote(pool){
    let db_res = await issues_query.add_votes(pool,test_issue,test_voter_id[0]);
    assert (db_res.data.length ,1);
+   db_res.client.release();
 
    db_res = await issues_query.add_votes(pool,test_issue,test_voter_id[1]);
    assert (db_res.data.length ,1);
+   db_res.client.release();
 
    db_res = await issues_query.add_votes(pool,test_issue,test_voter_id[2]);
    assert (db_res.data.length ,1);
+   db_res.client.release();
 }
 
 async function should_have_three_votes(pool){
    let db_res = await issues_query.count_votes(pool,test_issue); 
    assert.deepEqual(db_res.data,3);
+   db_res.client.release();
+
 }
 
 let pool = db_host.open_db();
@@ -58,4 +65,3 @@ await should_have_three_votes(pool);
 await should_delete_test_data(pool);
 await db_host.close_db(pool);
 console.log("TESTS PASSED");
-process.exit();
