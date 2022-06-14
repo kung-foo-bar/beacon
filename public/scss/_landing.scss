@@ -1,36 +1,51 @@
-#screen{
-    display: flex;
-    width: 100%;
+#screen {
+  position: relative;
+  background-color: black;
 }
-#filter{
-    width: 30%;
-    background-color: black;
-    color: white;
+
+.filter {
+  // width: 30%;
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: black;
+  color: white;
 }
-#posts{
-    width: 40%;
-    background-color: rgb(37, 37, 37);
-    text-align: center;
-    padding: 30px;
-    position: relative;
+
+.posts {
+  position:absolute;
+  height: 100vh;
+  overflow: scroll;
+  top: 0;
+  left: 25%;
+  text-align: center;
+  background-color: rgb(37, 37, 37);
+  padding: 30px;
 }
-#extra{
-    width: 30%;
-    background-color: black;
-    text-align: center;
+
+.extra {
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  background-color: black;
+  text-align: center;
 }
-#filter_navigation{
-    height: 80%;
+
+#filter_navigation {
+  height: 80%;
 }
-#navigation_profile{
-    height: 20%;
-    text-align: center;
+
+#navigation_profile {
+  height: 20%;
+  text-align: center;
 }
-#filters{
-    height: 100%;
-    text-align: center;
-    padding: 30px;
-    width: auto;
+
+#filters {
+  height: 100%;
+  text-align: center;
+  padding: 30px;
 }
 #filters p, #navigation_profile p{
     width: fit-content;
