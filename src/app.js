@@ -41,6 +41,17 @@ function report_err(err,res,msg){
    res.send(JSON.stringify(json_err));
 }
 
+function db_resolve(db_res,express_res){
+   db_res.then(rows =>{
+      //console.log(rows);
+      express_res.send(JSON.stringify(rows.data));
+      rows.client.release();
+   })
+   .catch(err => {
+      report_err(err,express_res);
+   });
+}
+
 // Navigation | Route to pages
 app.get('', (req, res) => {
   res.render('landing', { layout:'./pages/_landing',title: 'Homepage'});
@@ -63,19 +74,24 @@ app.get('/faq', (req, res) => {
 
 app.get('/users',json_parser,(req,res) => {
    let db_res = users_query.select_users(pool);
-   db_res.then(rows => {
-      res.send(JSON.stringify(rows.data));
-      res.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   });
+   db_resolve(db_res,res);
+});
+
+app.post('/users/posts'/json_parser,(req,res) => {
+   let db_res = users_query.created_issues(pool,req.body.user_id);
+   db_resolve(db_res,res);
+});
+
+app.post('/users/votes',json_parser,(req,res) => {
+   let db_res = users_query.voted_issues(pool,req.body.user_id); 
+   db_resolve(db_res,res);
 });
 
 app.put('/users',json_parser,(req,res) => {
    let db_res = users_query.insert_users(req.body.user_id,req.body.num);   
    db_res.then(rows => {
       res.send(JSON.stringify(rows.data));
+      res.client.release();
    })
    .catch((err) => {
       let msg = 'internal server error';
@@ -86,13 +102,7 @@ app.put('/users',json_parser,(req,res) => {
 
 app.delete('/users',json_parser,(req,res) => {
    let db_res = users_query.delete_users(pool,req.body.user_id);
-   db_res.then(rows => {
-      res.send(JSON.stringify(rows.data));
-      res.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res); 
-   });
+   db_resolve(db_res,res);
 });
 
 app.put('/issues',json_parser,(req,res) => {
@@ -118,13 +128,7 @@ app.put('/issues',json_parser,(req,res) => {
 
 app.post('/issues',json_parser,(req,res) => {
    let db_res = issue_server.filter_issues(pool,req.body.issue_type);
-   db_res.then(rows => {
-      res.send(JSON.stringify(rows.data));
-      rows.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   });
+   db_resolve(db_res,res);
 });
 
 app.delete('/issues',json_parser,(req,res) =>{
@@ -135,14 +139,7 @@ app.delete('/issues',json_parser,(req,res) =>{
    };
 
    let db_res = issues_query.delete_issue(pool,issue);
-
-   db_res.then(rows => {
-      res.send(JSON.stringify(rows.data));
-      rows.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   });
+   db_resolve(db_res,res);
 });
 
 app.put('/votes',json_parser,(req,res) => {
@@ -173,13 +170,7 @@ app.get('/votes',json_parser,(req,res) => {
    }; 
 
    let db_res = issues_query.count_votes(pool,issue);
-   db_res.then(votes => {
-   res.send(JSON.stringify({n_votes: votes.data}));
-      votes.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   });
+   db_resolve(db_res,res);
 });
 
 app.delete('/votes',json_parser,(req,res) => {
@@ -190,13 +181,7 @@ app.delete('/votes',json_parser,(req,res) => {
       asignee_id: req.body.asignee_id
    };
    let db_res = issues_query.remove_vote(pool,issue,v_id);
-   db_res.then(rows => {
-      res.send(JSON.stringify(rows.data));
-      rows.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   })
+   db_resolve(db_res,res);
 });
 // -------- any other pages should be set below here --------
 
