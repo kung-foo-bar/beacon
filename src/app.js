@@ -18,8 +18,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = process.env.PORT || 8000;
 
-// Caleb added just cuz... -\('_')/-
-let urlEncodedParser = bodyParser.urlencoded({extended: true});
 let jsonParser = bodyParser.json();
 
 let pool = db_host.open_db();
@@ -77,7 +75,7 @@ app.get('/users',json_parser,(req,res) => {
    db_resolve(db_res,res);
 });
 
-app.post('/users/posts'/json_parser,(req,res) => {
+app.post('/users/posts',json_parser,(req,res) => {
    let db_res = users_query.created_issues(pool,req.body.user_id);
    db_resolve(db_res,res);
 });
