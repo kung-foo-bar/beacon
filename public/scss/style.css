@@ -2,8 +2,7 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -12,6 +11,29 @@ body {
   color: white;
   overflow-x: hidden;
   background-color: black;
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
 }
 
 ul {
@@ -73,7 +95,6 @@ a {
   border-radius: 50%;
   background-color: #49525a;
   opacity: 0;
-  -webkit-transition: all 0.4 ease-in-out 0s;
   transition: all 0.4 ease-in-out 0s;
 }
 
@@ -86,28 +107,33 @@ a {
 }
 
 #screen {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  height: 100vh;
+  position: relative;
 }
 
-#filter {
-  width: 30%;
+.filter {
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  left: 0;
   background-color: black;
   color: white;
 }
 
-#posts {
-  width: 40%;
-  background-color: #252525;
+.posts {
+  position: absolute;
+  height: 100vh;
+  overflow: scroll;
+  top: 0;
   text-align: center;
+  background-color: #252525;
   padding: 30px;
 }
 
-#extra {
-  width: 30%;
+.extra {
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  right: 0;
   background-color: black;
   text-align: center;
 }
@@ -129,8 +155,6 @@ a {
 }
 
 #filters p, #navigation_profile p {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   margin-left: 35%;
 }
@@ -174,11 +198,8 @@ a {
   width: 100%;
   height: 10%;
   padding: 5% 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
 }
 
 .post_main {
@@ -192,21 +213,25 @@ a {
   height: 10%;
 }
 
+.post_footer div {
+  display: block;
+}
+
+.votes:hover {
+  cursor: pointer;
+}
+
 .wrapper {
   width: 50rem;
-  margin: auto;
+  margin: 1rem auto;
   border-radius: 1rem;
   height: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
 #category {
   width: 20%;
   text-align: center;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   border: 1px solid white;
   border-radius: 20px 0 0 20px;
@@ -255,7 +280,6 @@ a {
   border-radius: 2rem;
   outline: none;
   color: black;
-  -webkit-transition: 0.25s;
   transition: 0.25s;
 }
 /*# sourceMappingURL=style.css.map */

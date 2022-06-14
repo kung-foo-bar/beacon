@@ -1,6 +1,12 @@
 import postgres  from 'pg'; 
 const {Client,Pool} = postgres;
 
+const connectionString = 'postgres://postgres:postgrespw@localhost:55000'
+
+const pool = new Pool({
+  connectionString,
+})
+
 export function open_db(){
    const db_pd = process.env.SYN_DB_PSWD;
    const db_user = process.env.SYN_DB_USER;
@@ -9,11 +15,7 @@ export function open_db(){
    const db_database = process.env.SYN_DB_DB;
 
    const pool = new Pool({
-      user: db_user,
-      host: db_host,
-      database: db_database,
-      password: db_pd,
-      port: db_port
+    connectionString
    });
    return pool;
 }
