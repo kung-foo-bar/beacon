@@ -1,41 +1,37 @@
 .wrapper{
-  width: 50rem;
-  margin: 1rem auto;
-  border-radius: 1rem;
-  height: auto;
-  display: flex;
+    width: 50rem;
+    margin: auto;
+    border-radius: 1rem;
+    height: auto;
+    display: flex;
 }
-
 #category{
-  width: 20%;
-  text-align: center;
-  height: fit-content;
-  border: 1px solid white;
-  border-radius: 20px 0 0 20px;
+    width: 20%;
+    text-align: center;
+    height: fit-content;
+    border: 1px solid white;
+    border-radius: 20px 0 0 20px;
 }
-
 .categories{
-  padding: 3rem;
-  border: 1px solid black;
-  background-color: black;
-  border-radius: 20px;
-  height: 5px;
+    padding: 3rem;
+    border: 1px solid black;
+    background-color: black;
+    border-radius: 20px;
+    height: 5px;
 }
-
 .categories:hover{
-  cursor: pointer;
+    cursor: pointer;
 }
-
 #content{
-  color: white;
-  width: 100%;
-  background-color: darkcyan;
-  border-radius: 0 20px 20px 20px;
-}
+    color: white;
+    width: 100%;
+    background-color: darkcyan;
+    border-radius: 0 20px 20px 20px;
 
+}
 #content_title{
-  text-align: center;
-  padding: 30px;
+    text-align: center;
+    padding: 30px;
 }
 #form_info{
   text-align: center;
