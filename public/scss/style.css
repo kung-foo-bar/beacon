@@ -86,27 +86,35 @@ a {
 }
 
 #screen {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
+  position: relative;
+  background-color: black;
 }
 
-#filter {
-  width: 30%;
+.filter {
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  left: 0;
   background-color: black;
   color: white;
 }
 
-#posts {
-  width: 40%;
-  background-color: #252525;
+.posts {
+  position: absolute;
+  height: 100vh;
+  overflow: scroll;
+  top: 0;
+  left: 25%;
   text-align: center;
+  background-color: #252525;
   padding: 30px;
 }
 
-#extra {
-  width: 30%;
+.extra {
+  position: absolute;
+  height: 100vh;
+  top: 0;
+  right: 0;
   background-color: black;
   text-align: center;
 }
@@ -124,7 +132,6 @@ a {
   height: 100%;
   text-align: center;
   padding: 30px;
-  width: auto;
 }
 
 #filters p, #navigation_profile p {
