@@ -32,16 +32,16 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                    <a class="nav-link" aria-current="page" href="/">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/about">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/rr">Report/Request</a>
+                                    <a class="nav-link" href="/rr">Report/ Request</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/forum">Forum</a>
+                                    <a class="nav-link active" href="/forum">Forum</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/donate">Donate</a>
@@ -85,51 +85,34 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <!-- My Script -->
+
     <script>
-        // Getting Dom elements
-        let waterFilterButton = document.getElementById("water_filter");
-        let foodFilterButton = document.getElementById("food_filter");
-        let wasteFilterButton = document.getElementById("waste_filter");
-        let transportFilterButton = document.getElementById("transport_filter");
-        let crimeFilterButton = document.getElementById("crime_filter");
-        let votes = document.querySelectorAll(".votes");
-        let filterButtons = document.querySelectorAll(".filterButtons");
+        var x = document.getElementById("login");
+        var y = document.getElementById("signup");
+        var z = document.getElementById("btn");
 
-        //Add event listeners
-        //(1.)
-        filterButtons.forEach(filterButton => { // Query for post with a certain #hashtag
-                filterButton.addEventListener('click', (e) => {
-                    let hashtag = filterButton.id; //hashtag to be Queried for
+        function signup() {
+            x.style.left = "-400px";
+            y.style.left = "50px";
+            z.style.left = "110px";
+        }
 
-                    //Create Request 
-                    const xhttp = new XMLHttpRequest();
-
-                    xhttp.open("POST", "", true);
-
-                    xhttp.setRequestHeader("Accept", "application/json");
-                    xhttp.setRequestHeader('Content-type', 'application/json');
-
-                    xhttp.onload = function() {
-                        let res = JSON.parse(this.responseText)
-                        console.log(res)
-                    }
-
-                    let req = {
-                        category: hashtag,
-                    }
-
-                    // Send data
-                    xhttp.send(JSON.stringify(req));
-                })
-            })
-            //(2.)
-        votes.forEach(voteButton => {
-            voteButton.addEventListener('click', (e) => {
-                voteButton.innerHTML++;
-            })
-        })
+        function login() {
+            x.style.left = "50px";
+            y.style.left = "450px";
+            z.style.left = "0px";
+        }
     </script>
+
+    <script>
+        var modal = document.getElementById("login_form");
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
 </body>
 
 </html>

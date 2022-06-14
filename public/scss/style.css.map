@@ -6,7 +6,8 @@
         "_globals.scss",
         "_navbar.scss",
         "_landing.scss",
-        "_rr.scss"
+        "_rr.scss",
+        "_login.scss"
     ],
     "names": [],
     "file": "style.css"

@@ -1,9 +1,9 @@
 // imports
 import express, { json } from 'express';
 import bodyParser from 'body-parser';
-import expressLayouts  from 'express-ejs-layouts';
-import {dirname} from 'path';
-import {fileURLToPath} from 'url';
+import expressLayouts from 'express-ejs-layouts';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import process from 'node:process';
 
@@ -12,12 +12,13 @@ import * as issue_server from './routes/issues/issues_server.js';
 
 import * as db_common from './db_common.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(
+    import.meta.url));
 const app = express();
 const port = process.env.PORT || 8000;
 
 // Caleb added just cuz... -\('_')/-
-let urlEncodedParser = bodyParser.urlencoded({extended: true});
+let urlEncodedParser = bodyParser.urlencoded({ extended: true });
 let jsonParser = bodyParser.json();
 
 let pool = db_host.open_db();
@@ -34,30 +35,33 @@ app.set('view engine', 'ejs');
 
 // Navigation | Route to pages
 app.get('', (req, res) => {
-  res.render('landing', { layout:'./pages/_landing',title: 'Homepage'});
+    res.render('landing', { layout: './pages/_landing', title: 'Homepage' });
 })
 app.get('/about', (req, res) => {
-  res.render('about', { layout: './pages/_about', title: 'About' })
+    res.render('about', { layout: './pages/_about', title: 'About' })
 })
 app.get('/rr', (req, res) => {
-  res.render('rr', { layout: './pages/_rr', title: 'R/R' })
+    res.render('rr', { layout: './pages/_rr', title: 'R/R' })
 })
 app.get('/forum', (req, res) => {
-  res.render('forum', { layout: './pages/_forum', title: 'Forum' })
+    res.render('forum', { layout: './pages/_forum', title: 'Forum' })
 })
 app.get('/donate', (req, res) => {
-  res.render('donate', { layout: './pages/_donate', title: 'Donate' })
+    res.render('donate', { layout: './pages/_donate', title: 'Donate' })
 })
 app.get('/faq', (req, res) => {
-  res.render('faq', { layout: './pages/_faq', title: 'FAQs' })
+    res.render('faq', { layout: './pages/_faq', title: 'FAQs' })
 })
-app.post('',jsonParser,(req,res)=>{
-  console.log(req.body);
-  res.send(JSON.stringify(req.body));
+app.get('/login', (req, res) => {
+    res.render('login', { layout: './pages/_login', title: 'Login' })
+})
+app.post('', jsonParser, (req, res) => {
+    console.log(req.body);
+    res.send(JSON.stringify(req.body));
 });
-app.post('/rr',jsonParser,(req,res)=>{
-  console.log(req.body);
-  res.send(JSON.stringify(req.body));
+app.post('/rr', jsonParser, (req, res) => {
+    console.log(req.body);
+    res.send(JSON.stringify(req.body));
 });
 
 // app.get('/report', (req, res) => {
@@ -72,19 +76,19 @@ app.post('/rr',jsonParser,(req,res)=>{
 //   res.render('contact', { layout: './layouts/_contact', title: 'Contact Page' })
 // })
 
-app.post('/issues',json_parser,(req,res) => {
-  let oldest = new Date();
-  oldest.setTime(req.body.after);
-  let db_res = issue_server.get_within_period(pool,oldest);
-  db_res.then(rows => {
-     res.send(JSON.stringify(rows.data));
-     rows.client.release();
-  })
-  .catch((err) => {
-     db_common.log_pg_err(err);
-     let json_err = {status: 500, err: 'internal server error'};
-     res.send(JSON.stringify(json_err));
-  });
+app.post('/issues', json_parser, (req, res) => {
+    let oldest = new Date();
+    oldest.setTime(req.body.after);
+    let db_res = issue_server.get_within_period(pool, oldest);
+    db_res.then(rows => {
+            res.send(JSON.stringify(rows.data));
+            rows.client.release();
+        })
+        .catch((err) => {
+            db_common.log_pg_err(err);
+            let json_err = { status: 500, err: 'internal server error' };
+            res.send(JSON.stringify(json_err));
+        });
 });
 
 // Listen on port 8000
