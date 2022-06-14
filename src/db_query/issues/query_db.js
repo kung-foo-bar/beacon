@@ -3,6 +3,7 @@ import * as db_host from '../../db_host.js'
 export function Issue(title,msg,type,creator_id,asignee_id){
    return {title: title,msg: msg,type: type,creator_id: creator_id,asignee_id: asignee_id};
 }
+
 export async function insert_issues(pool,issue){
    const client = await pool.connect();
    const time_now  = new Date();
@@ -21,7 +22,7 @@ export async function insert_issues(pool,issue){
    return {client: client,data: raw_data.rows}
 }
 
-export async function select_issues(pool,key,value){
+export async function select_issues(pool){
    const client = await pool.connect();
    let raw_data = await pool.query('SELECT * FROM issues');
    return {client: client, data: raw_data.rows};
@@ -58,6 +59,7 @@ export async function remove_vote(pool,issue,voter_id){
    let raw_data = await client.query(query);
    return {client: client, data: raw_data.rows};
 }
+
 export async function delete_issue(pool,issue){
    const client = await pool.connect();
    const query = {
