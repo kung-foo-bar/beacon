@@ -7,22 +7,6 @@ export function filter(rows,key,value){
    return rows.filter(row => row[key] === value);
 }
 
-
-function test_delete(pool,issue){
-   return issues_db.delete_issue(pool,issue);
-}
-
-function test_count_votes(pool,issue){
-   let res_votes =  issues_db.count_votes(pool,issue);
-   res_votes.then(rows => {
-      console.log(rows.data);
-      assert.deepEqual(rows.data[0].n_votes,1);
-      rows.client.release();
-      test_delete(pool,issue);
-   })
-   .catch((err) => {log_pg_err(err)});
-}
-
 export function log_pg_err(err){
    if(err.detail){
       console.log("PG ERR: " + err.detail)
