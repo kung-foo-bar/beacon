@@ -18,14 +18,17 @@
 
   <!-- header start -->
   <header class="header-area">
-    <div class="nav-area">   <!-- navbar start -->
+    <div class="nav-area">
+      <!-- navbar start -->
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid">
             <a class="navbar-brand" href="">
               <img class="logo-img" src="img/Logo.png" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -55,21 +58,22 @@
         </nav>
       </div>
     </div> <!-- navbar end -->
-    <div class="header-hero"> <!-- home start -->
+    <div class="header-hero">
+      <!-- home start -->
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-10">
 
           </div>
           <div class="col-lg-3 col-md-6">
-            
+
           </div>
         </div>
       </div>
 
 
     </div> <!-- home end -->
-  </header> 
+  </header>
   <!-- header end -->
   <main>
     <%- body %>
@@ -86,62 +90,63 @@
     crossorigin="anonymous"></script>
 
 
-    
-    <script>
-      class Post {
-        constructor(_firstName, _lastName, _address, _phoneNumber, _description){
-          this.firstName = _firstName;
-          this.lastName = _lastName;
-          this.address = _address;
-          this.phoneNumber = _phoneNumber;
-          this.description = _description;
-        }
+
+  <script>
+    class Post {
+      constructor (_firstName, _lastName, _address, _phoneNumber, _description) {
+        this.firstName = _firstName;
+        this.lastName = _lastName;
+        this.address = _address;
+        this.phoneNumber = _phoneNumber;
+        this.description = _description;
       }
-      //========================  Getting Dom Elements
-      let categories = document.querySelectorAll(".categories");
-      let title = document.getElementById("content_title");
-      let form = document.getElementById("form_info");
+    }
+    //========================  Getting Dom Elements
+    let categories = document.querySelectorAll(".categories");
+    let title = document.getElementById("content_title");
+    let form = document.getElementById("form_info");
 
 
-      //======================== Adding event listiners
-      // change Title on card
-      categories.forEach(item => {
-        item.addEventListener('click', event =>{
-          title.innerHTML = item.innerHTML;
-        })
-      });
-
-      //======================== Getting form infromation
-      //putting info into an Object on Submittion
-      document.querySelector('form').addEventListener('submit', (e) => {
-        const data = Object.fromEntries(new FormData(e.target).entries());
-
-        //============================== Create Request ==================================
-        const xhttp = new XMLHttpRequest();
-
-        xhttp.open("POST", "/rr", true);
-
-        xhttp.setRequestHeader("Accept", "application/json");
-        xhttp.setRequestHeader('Content-type', 'application/json');
-
-        xhttp.onload = function () {
-          let res = JSON.parse(this.responseText) 
-          console.log(data)
-        }
-
-        // Send data
-        xhttp.send(JSON.stringify(data));
-
-        //stop form from reloading the page
-        e.preventDefault();
-        e.stopImmediatePropagation()
-
-        //Reset the form inputs to be empty
-        form.reset()
+    //======================== Adding event listiners
+    // change Title on card
+    categories.forEach(item => {
+      item.addEventListener('click', event => {
+        title.innerHTML = item.innerHTML;
       })
-    </script>
+    });
+
+    //======================== Getting form infromation
+    //putting info into an Object on Submittion
+    document.querySelector('form').addEventListener('submit', (e) => {
+      const data = Object.fromEntries(new FormData(e.target).entries());
+
+      //============================== Create Request ==================================
+      const xhttp = new XMLHttpRequest();
+
+      xhttp.open("POST", "/rr", true);
+
+      xhttp.setRequestHeader("Accept", "application/json");
+      xhttp.setRequestHeader('Content-type', 'application/json');
+
+      xhttp.onload = function () {
+        let res = JSON.parse(this.responseText)
+        console.log(data)
+      }
+
+      // Send data
+      xhttp.send(JSON.stringify(data));
+
+      //stop form from reloading the page
+      e.preventDefault();
+      e.stopImmediatePropagation()
+
+      //Reset the form inputs to be empty
+      form.reset()
+    })
+  </script>
 
 
 
 </body>
+
 </html>

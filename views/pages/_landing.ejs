@@ -18,14 +18,17 @@
 
   <!-- header start -->
   <header class="header-area">
-    <div class="nav-area">   <!-- navbar start -->
+    <div class="nav-area">
+      <!-- navbar start -->
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid">
             <a class="navbar-brand" href="">
               <img class="logo-img" src="img/Logo.png" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -54,21 +57,8 @@
         </nav>
       </div>
     </div> <!-- navbar end -->
-    <div class="header-hero"> <!-- home start -->
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-10">
-
-          </div>
-          <div class="col-lg-3 col-md-6">
-            
-          </div>
-        </div>
-      </div>
-
-
-    </div> <!-- home end -->
-  </header> 
+    <div class="header-hero">
+  </header>
   <!-- header end -->
   <main>
     <%- body %>
@@ -104,24 +94,24 @@
           //Create Request 
           const xhttp = new XMLHttpRequest();
 
-          xhttp.open("POST", "", true);
+        xhttp.open("POST", "", true);
 
-          xhttp.setRequestHeader("Accept", "application/json");
-          xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader('Content-type', 'application/json');
 
-          xhttp.onload = function () {
-            let res = JSON.parse(this.responseText) 
-            console.log(res)
-          }
+        xhttp.onload = function () {
+          let res = JSON.parse(this.responseText)
+          console.log(res)
+        }
 
-          let req = {
-            category: hashtag,
-          }
+        let req = {
+          category: hashtag,
+        }
 
-          // Send data
-          xhttp.send(JSON.stringify(req));
-        })
+        // Send data
+        xhttp.send(JSON.stringify(req));
       })
+    })
       //(2.)
       votes.forEach(voteButton =>{
         voteButton.addEventListener('click', (e)=>{
@@ -129,5 +119,7 @@
         })
       })
     </script>
+
 </body>
+
 </html>
