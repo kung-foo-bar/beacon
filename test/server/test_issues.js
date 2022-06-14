@@ -10,7 +10,7 @@ const test_issue = {
    creator_id: 'Aira',
    asignee_id: 'LE BOSS'
  }
-const test_voter_id = 'Paigen';
+const test_voter_id = ['Paigen','SupaVilan','MF DOOM'];
 const test_key = [test_issue[0],test_issue[4],test_issue[5]];
 
 
@@ -35,14 +35,26 @@ async function delete_test_data(pool){
 }
 
 async function should_add_vote(pool){
-   let db_res = await issues_query.add_votes(pool,test_issue,test_voter_id);
+   let db_res = await issues_query.add_votes(pool,test_issue,test_voter_id[0]);
    assert (db_res.data.length ,1);
+
+   db_res = await issues_query.add_votes(pool,test_issue,test_voter_id[1]);
+   assert (db_res.data.length ,1);
+
+   db_res = await issues_query.add_votes(pool,test_issue,test_voter_id[2]);
+   assert (db_res.data.length ,1);
+}
+
+async function should_have_three_votes(pool){
+   let db_res = await issues_query.count_votes(pool,test_issue); 
+   assert.deepEqual(db_res.data,3);
 }
 
 let pool = db_host.open_db();
 await delete_test_data(pool);
 await make_test_data(pool);
 await should_add_vote(pool);
+await should_have_three_votes(pool);
 await should_delete_test_data(pool);
 await db_host.close_db(pool);
 console.log("TESTS PASSED");
