@@ -1,18 +1,22 @@
+.navbar {
+  // position: fixed;
+  z-index: 1;
+  padding: 10px 0;
+}
+
 .navbar-area {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
-.container{
+
+.container {
   border-bottom: 1px solid white;
-}
-.navbar {
-  position: relative;
-  padding: 20px 0;
 }
 
 .navbar-brand .logo-img {
+  width: 125px;
   max-width: 150px;
 }
 
