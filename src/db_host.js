@@ -16,10 +16,13 @@ export function open_db(){
       return pool;
    }
 
-   const connectionString = 'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
 
    const pool = new Pool({
-      connectionString,
+     user: db_user,
+     host: db_host,
+     database: db_database,
+     password: db_pd,
+     port: db_port,
    });
    return pool;
 }
