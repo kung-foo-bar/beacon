@@ -1,5 +1,5 @@
-export function User(name,num){
-   return {name: name, num: num};
+export function User(name,num,upvoted_posts){
+   return {name: name, num: num, upvoted_posts: upvoted_posts};
 }
 export async function insert_users(pool,user){
    if(!user){
@@ -32,3 +32,4 @@ export async function select_users(pool,key,value){
    return {client: client, data: raw_data.rows};
 }
 
+export async function voted_posts(pool,user){}
