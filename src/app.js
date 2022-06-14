@@ -111,7 +111,8 @@ app.delete('/issues',json_parser,(req,res) =>{
       report_err(err,res);
    });
 });
-app.patch('/issues',json_parser,(req,res) => {
+
+app.put('/votes',json_parser,(req,res) => {
    let v_id  = req.body.voter_id;
    let issue = {
       title: req.body.title, 
@@ -146,6 +147,22 @@ app.get('/votes',json_parser,(req,res) => {
    .catch((err) => {
       report_err(err,res);
    });
+});
+
+app.delete('/votes',json_parser,(req,res) => {
+   let v_id = req.body.voter_id;
+   let issue = {
+      title: req.body.title,
+      creator_id: req.body.creator_id,
+      asignee_id: req.body.asignee_id
+   };
+   let db_res = issues_query.remove_vote(pool,issue,v_id);
+   db_res.then(rows => {
+      res.send(JSON.stringify(rows.data));
+   })
+   .catch((err) => {
+      report_err(err,res);
+   })
 });
 // -------- any other pages should be set below here --------
 

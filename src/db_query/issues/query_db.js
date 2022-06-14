@@ -51,7 +51,7 @@ export async function add_votes(pool,issue,voter_id){
 export async function remove_vote(pool,issue,voter_id){
    const client = await pool.connect();
    const query = {
-      text: 'DELETE FROM Votes where post_title = $1 AND creator_id = $2 AND asignee_id = $3 AND voter_id = $4 RETURNING *',
+      text: 'DELETE FROM Votes where post_title = $1 AND post_creator_id = $2 AND post_asignee_id = $3 AND voter_id = $4 RETURNING *',
       values: [issue.title, issue.creator_id, issue.asignee_id, voter_id]
    };
 
