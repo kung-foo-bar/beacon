@@ -159,6 +159,7 @@ app.delete('/votes',json_parser,(req,res) => {
    let db_res = issues_query.remove_vote(pool,issue,v_id);
    db_res.then(rows => {
       res.send(JSON.stringify(rows.data));
+      rows.client.release();
    })
    .catch((err) => {
       report_err(err,res);
