@@ -10,6 +10,7 @@ import process from 'node:process';
 import * as db_host from './db_host.js';
 import * as issue_server from './routes/issues/issues_server.js';
 import * as issues_query from './db_query/issues/query_db.js';
+import * as users_query from './db_query/users/query_db.js';
 import * as db_common from './db_common.js';
 import * as db_err from './db_err.js';
 
@@ -17,8 +18,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = process.env.PORT || 8000;
 
-// Caleb added just cuz... -\('_')/-
-let urlEncodedParser = bodyParser.urlencoded({extended: true});
 let jsonParser = bodyParser.json();
 
 let pool = db_host.open_db();
@@ -38,6 +37,17 @@ function report_err(err,res,msg){
    let res_msg = (msg) ? msg : 'internal server error';
    let json_err = {status: 500, err: res_msg};
    res.send(JSON.stringify(json_err));
+}
+
+function db_resolve(db_res,express_res){
+   db_res.then(rows =>{
+      //console.log(rows);
+      express_res.send(JSON.stringify(rows.data));
+      rows.client.release();
+   })
+   .catch(err => {
+      report_err(err,express_res);
+   });
 }
 
 // Navigation | Route to pages
@@ -119,6 +129,39 @@ app.post('',jsonParser,(req,res)=>{
   res.send(result);
 });
 
+app.get('/users',json_parser,(req,res) => {
+   let db_res = users_query.select_users(pool);
+   db_resolve(db_res,res);
+});
+
+app.post('/users/posts',json_parser,(req,res) => {
+   let db_res = users_query.created_issues(pool,req.body.user_id);
+   db_resolve(db_res,res);
+});
+
+app.post('/users/votes',json_parser,(req,res) => {
+   let db_res = users_query.voted_issues(pool,req.body.user_id); 
+   db_resolve(db_res,res);
+});
+
+app.put('/users',json_parser,(req,res) => {
+   let db_res = users_query.insert_users(req.body.user_id,req.body.num);   
+   db_res.then(rows => {
+      res.send(JSON.stringify(rows.data));
+      res.client.release();
+   })
+   .catch((err) => {
+      let msg = 'internal server error';
+      if(db_err.get_db_err(err) === db_err.PG_ERR_DUP) msg = 'user already exists within database';
+      report_err(err,res,msg);
+   });
+});
+
+app.delete('/users',json_parser,(req,res) => {
+   let db_res = users_query.delete_users(pool,req.body.user_id);
+   db_resolve(db_res,res);
+});
+
 app.put('/issues',json_parser,(req,res) => {
    let new_issue = {
       title: req.body.title,
@@ -141,16 +184,8 @@ app.put('/issues',json_parser,(req,res) => {
 });
 
 app.post('/issues',json_parser,(req,res) => {
-   let oldest = new Date();
-   oldest.setTime(req.body.after);
-   let db_res = issue_server.get_within_period(pool,oldest);
-   db_res.then(rows => {
-      res.send(JSON.stringify(rows.data));
-      rows.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   });
+   let db_res = issue_server.filter_issues(pool,req.body.issue_type);
+   db_resolve(db_res,res);
 });
 
 app.delete('/issues',json_parser,(req,res) =>{
@@ -161,14 +196,7 @@ app.delete('/issues',json_parser,(req,res) =>{
    };
 
    let db_res = issues_query.delete_issue(pool,issue);
-
-   db_res.then(rows => {
-      res.send(JSON.stringify(rows.data));
-      rows.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   });
+   db_resolve(db_res,res);
 });
 
 app.put('/votes',json_parser,(req,res) => {
@@ -199,13 +227,7 @@ app.get('/votes',json_parser,(req,res) => {
    }; 
 
    let db_res = issues_query.count_votes(pool,issue);
-   db_res.then(votes => {
-   res.send(JSON.stringify({n_votes: votes.data}));
-      votes.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   });
+   db_resolve(db_res,res);
 });
 
 app.delete('/votes',json_parser,(req,res) => {
@@ -216,13 +238,7 @@ app.delete('/votes',json_parser,(req,res) => {
       asignee_id: req.body.asignee_id
    };
    let db_res = issues_query.remove_vote(pool,issue,v_id);
-   db_res.then(rows => {
-      res.send(JSON.stringify(rows.data));
-      rows.client.release();
-   })
-   .catch((err) => {
-      report_err(err,res);
-   })
+   db_resolve(db_res,res);
 });
 // -------- any other pages should be set below here --------
 
@@ -232,21 +248,6 @@ app.delete('/votes',json_parser,(req,res) => {
 // app.get('/contact', (req, res) => {
 //   res.render('contact', { layout: './layouts/_contact', title: 'Contact Page' })
 // })
-
-app.post('/issues',json_parser,(req,res) => {
-  let oldest = new Date();
-  oldest.setTime(req.body.after);
-  let db_res = issue_server.get_within_period(pool,oldest);
-  db_res.then(rows => {
-     res.send(JSON.stringify(rows.data));
-     rows.client.release();
-  })
-  .catch((err) => {
-     db_common.log_pg_err(err);
-     let json_err = {status: 500, err: 'internal server error'};
-     res.send(JSON.stringify(json_err));
-  });
-});
 
 // Listen on port 8000
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
