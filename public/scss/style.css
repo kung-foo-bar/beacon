@@ -140,6 +140,7 @@ a {
   text-align: center;
   background-color: #252525;
   padding: 30px;
+  position: relative;
 }
 
 .extra {

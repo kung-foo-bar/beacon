@@ -74,24 +74,25 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-  <!-- My Script -->
-  <script>
-    // Getting Dom elements
-    let waterFilterButton = document.getElementById("water_filter");
-    let foodFilterButton = document.getElementById("food_filter");
-    let wasteFilterButton = document.getElementById("waste_filter");
-    let transportFilterButton = document.getElementById("transport_filter");
-    let crimeFilterButton = document.getElementById("crime_filter");
+<!-- My Script -->
+    <script>
+      // Getting Dom elements
+      let waterFilterButton = document.getElementById("water_filter");
+      let foodFilterButton = document.getElementById("food_filter");
+      let wasteFilterButton = document.getElementById("waste_filter");
+      let transportFilterButton = document.getElementById("transport_filter");
+      let crimeFilterButton = document.getElementById("crime_filter");
+      let votes = document.querySelectorAll(".votes");
+      let filterButtons = document.querySelectorAll(".filterButtons");
 
-    let filterButtons = document.querySelectorAll(".filterButtons");
+      //Add event listeners
+      //(1.)
+      filterButtons.forEach(filterButton =>{ // Query for post with a certain #hashtag
+        filterButton.addEventListener('click', (e)=>{
+          let hashtag = filterButton.id; //hashtag to be Queried for
 
-    //Add event listeners
-    filterButtons.forEach(filterButton => { // Query for post with a certain #hashtag
-      filterButton.addEventListener('click', (e) => {
-        let hashtag = filterButton.id; //hashtag to be Queried for
-
-        //============================== Create Request ==================================
-        const xhttp = new XMLHttpRequest();
+          //Create Request 
+          const xhttp = new XMLHttpRequest();
 
         xhttp.open("POST", "", true);
 
@@ -111,7 +112,14 @@
         xhttp.send(JSON.stringify(req));
       })
     })
-  </script>
+      //(2.)
+      votes.forEach(voteButton =>{
+        voteButton.addEventListener('click', (e)=>{
+          voteButton.innerHTML++; 
+        })
+      })
+    </script>
+
 </body>
 
 </html>
