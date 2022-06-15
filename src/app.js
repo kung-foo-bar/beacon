@@ -69,64 +69,6 @@ app.get('/donate', (req, res) => {
 app.get('/faq', (req, res) => {
   res.render('faq', { layout: './pages/_faq', title: 'FAQs' })
 })
-app.post('',jsonParser,(req,res)=>{
-  let query = req.body.category;
-  // Step 1 : Query the back end for feeds of a certain category 
-  // Step 2 : The back end sends all feeds fitting and putts it in result; which will be an empty array inisialised all the time
-  // Step 3 : Send the array to the front end
-  let result = [
-      {
-      firstName: "Chidz",
-      lastName: "Okoh",
-      category: "Waste",
-      numberOfVotes: 6,
-      text: "Chidz's issue"
-      },
-      {
-        firstName: "Tai",
-        lastName: "Jun",
-        category: "Transport",
-        numberOfVotes: 4,
-        text: "Tai's issue"
-      },
-      {
-        firstName: "Lewis",
-        lastName: "Walsh",
-        category: "Crime",
-        numberOfVotes: 8,
-        text: "Carine's issue"
-      }
-    ] 
-  
-  res.send(result);
-});
-
-app.post('/test',jsonParser,(req,res)=>{
-  let result = [
-    {
-    firstName: "Rose",
-    lastName: "kaggwa",
-    category: "Water",
-    numberOfVotes: 6,
-    text: "Rosette's issue"
-    },
-    {
-      firstName: "Caleb",
-      lastName: "Adeyemo",
-      category: "Water",
-      numberOfVotes: 4,
-      text: "Caleb's issue"
-    },
-    {
-      firstName: "Carine",
-      lastName: "Loo",
-      category: "Water",
-      numberOfVotes: 8,
-      text: "Carine's issue"
-    }
-  ]
-  res.send(result);
-});
 
 app.get('/users',json_parser,(req,res) => {
    let db_res = users_query.select_users(pool);
@@ -187,6 +129,10 @@ app.post('/issues',json_parser,(req,res) => {
    db_resolve(db_res,res);
 });
 
+app.post('/issues/all',(req,res) => {
+   let db_res = issues_query.select_issues(pool);
+   db_resolve(db_res,res);
+})
 app.delete('/issues',json_parser,(req,res) =>{
    let issue = {
       title: req.body.title, 
