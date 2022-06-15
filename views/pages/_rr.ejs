@@ -107,10 +107,9 @@
       // change Title on card
       categories.forEach(item => {
         item.addEventListener('click', event =>{
-          title.innerHTML = item.innerHTML;
+          title.innerHTML = item.id;
         })
       });
-
       //======================== Getting form infromation
       //putting info into an Object on Submittion
       document.querySelector('form').addEventListener('submit', (e) => {
@@ -119,18 +118,24 @@
         //============================== Create Request ==================================
         const xhttp = new XMLHttpRequest();
 
-        xhttp.open("POST", "/rr", true);
+        xhttp.open("PUT", "issues", true);
 
         xhttp.setRequestHeader("Accept", "application/json");
         xhttp.setRequestHeader('Content-type', 'application/json');
 
         xhttp.onload = function () {
           let res = JSON.parse(this.responseText) 
-          console.log(data)
+          console.log(res)
         }
-
+        let _data = {
+          title: data.title,
+          msg: data.text,
+          type: title.innerHTML,
+          creator_id: data.firstName,
+          asignee_id: data.firstName
+        }
         // Send data
-        xhttp.send(JSON.stringify(data));
+        xhttp.send(JSON.stringify(_data));
 
         //stop form from reloading the page
         e.preventDefault();

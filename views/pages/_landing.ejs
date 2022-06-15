@@ -123,35 +123,35 @@
 
 
       // ============================================== Window EventListener ==============================================
-      window.addEventListener('load', (event) =>{
-        //Create Request 
-        const xhttp = new XMLHttpRequest();
+      // window.addEventListener('load', (event) =>{
+      //   //Create Request 
+      //   const xhttp = new XMLHttpRequest();
 
-        xhttp.open("POST", "", true); // This is the route to post to
+      //   xhttp.open("POST", "", true); // This is the route to post to
 
-        xhttp.setRequestHeader("Accept", "application/json");
-        xhttp.setRequestHeader('Content-type', 'application/json');
+      //   xhttp.setRequestHeader("Accept", "application/json");
+      //   xhttp.setRequestHeader('Content-type', 'application/json');
 
-        xhttp.onload = function () {
-          //Get response from server
-          let res = JSON.parse(this.responseText) ;
-          //Create JSON Objects from response
-          for (const [key, value] of Object.entries(res)){
-            //Add posts to feed
-            addPost(value); 
-          }
-          //Add other Eventlisteners 
-          incrementVote(); // Make votes able to increment
-          addPostEvent(); // Make comments show for the right post when clicked
-        }
+      //   xhttp.onload = function () {
+      //     //Get response from server
+      //     let res = JSON.parse(this.responseText) ;
+      //     //Create JSON Objects from response
+      //     for (const [key, value] of Object.entries(res)){
+      //       //Add posts to feed
+      //       addPost(value); 
+      //     }
+      //     //Add other Eventlisteners 
+      //     incrementVote(); // Make votes able to increment
+      //     addPostEvent(); // Make comments show for the right post when clicked
+      //   }
 
-        // Request object to be sent to server
-        let req = {
-          category: "load",
-        }
-        // Send Request
-        xhttp.send(JSON.stringify(req));
-      })
+      //   // Request object to be sent to server
+      //   let req = {
+      //     category: "load",
+      //   }
+      //   // Send Request
+      //   xhttp.send(JSON.stringify(req));
+      // })
       // ============================================== Filter EventListener ==============================================
       // Query for post with a certain #hashtag
       filterButtons.forEach(filterButton =>{ 
@@ -162,7 +162,7 @@
           //Create Request 
           const xhttp = new XMLHttpRequest();
 
-          xhttp.open("POST", "test", true);
+          xhttp.open("POST", "issues", true);
 
           xhttp.setRequestHeader("Accept", "application/json");
           xhttp.setRequestHeader('Content-type', 'application/json');
@@ -170,6 +170,7 @@
           xhttp.onload = function () {
             //Get response from server
             let res = JSON.parse(this.responseText)
+            console.log(res)
             //Clear all the posts on the page
             clearPosts()
             //Create JSON Objects from response
@@ -183,7 +184,7 @@
           }
 
           let req = {
-            category: hashtag,
+            issue_type: hashtag,
           }
 
           // Send data
@@ -197,11 +198,11 @@
         feed.innerHTML += `
         <div class='post'>
           <div class="post_header">
-              <p class="user_name">${obj.firstName + " "} ${obj.lastName}</p>
-              <p class="category">#${obj.category}</p>
+              <p class="user_name">${obj.creator_id}</p>
+              <p class="category">#${obj.issue_type}</p>
           </div>
           <div class="post_main">
-              <p>${obj.text}</p>
+              <p>${obj.msg}</p>
           </div>
           <div class="post_footer">
               <p class="votes">${obj.numberOfVotes}</p>
