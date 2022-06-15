@@ -49,7 +49,7 @@
                   <a class="nav-link" href="/faq">FAQs</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/login">Login</a>
+                  <a class="nav-link" href="/login">Sign Up</a>
                 </li>
               </ul>
             </div>
@@ -108,6 +108,7 @@
       let filterButtons = document.querySelectorAll(".filterButtons");
       let home = document.getElementById("home");
       let hashtag
+      let profile = document.getElementById("profile");
 
       //Feed section
       let userName = document.querySelectorAll(".user_name");
@@ -192,7 +193,16 @@
               <p class="commenter_name">Caleb</p>
           </div>
           <div class="comment_main">
-              <p>This is a Test Comment</p>
+              <p>This is Caleb's Comment</p>
+          </div>
+        </div>
+
+        <div class="comments">
+          <div class="comment_header">
+              <p class="commenter_name">Chiedz</p>
+          </div>
+          <div class="comment_main">
+              <p>This is Chiedz' Comment</p>
           </div>
         </div>
         `
@@ -275,6 +285,37 @@
           // Send data
           xhttp.send(JSON.stringify(req));
       }
+      profile.addEventListener('click', (e) =>{
+        //Create Request 
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "users/posts", true);
+
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader('Content-type', 'application/json');
+
+        xhttp.onload = function () {
+          //Get response from server
+          let res = JSON.parse(this.responseText)
+          //Clear all the posts on the page
+          clearPosts()
+          //Create JSON Objects from response
+          for (const [key, value] of Object.entries(res)){
+            //Add posts to feed
+            addPost(value); 
+          }
+          //Add other Eventlisteners 
+          incrementVote(); // Make votes able to increment
+          addPostEvent(); // Make comments show for the right post when clicked
+          }
+
+          let req = {
+            issue_type: hashtag,
+          }
+
+          // Send data
+          xhttp.send(JSON.stringify(req));
+      })
     </script>
 </body>
 </html>

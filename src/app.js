@@ -71,6 +71,9 @@ app.get('/faq', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login', { layout: './pages/_login', title: 'Login' })
 })
+app.get('/profile', (req, res) => {
+   res.render('profile', { layout: './pages/_profile', title: 'Profile' })
+ })
 // ----- end navigation routes -----
 
 app.get('/users',json_parser,(req,res) => {
