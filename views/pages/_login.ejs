@@ -103,6 +103,39 @@
         modal.style.display = "none";
       }
     }
+
+    //======================== Getting form infromation ==================================
+    //putting info into an Object on Submittion
+    let form = document.getElementById("login");
+    form.addEventListener('submit', (e) => {
+      const data = Object.fromEntries(new FormData(e.target).entries());
+
+      //============================== Create Request ==================================
+      const xhttp = new XMLHttpRequest();
+
+      xhttp.open("PUT", "users", true);
+
+      xhttp.setRequestHeader("Accept", "application/json");
+      xhttp.setRequestHeader('Content-type', 'application/json');
+
+      xhttp.onload = function () {
+        let res = JSON.parse(this.responseText)
+        console.log(res)
+      }
+      let _data = {
+        user_id: data.user_id,
+        num: data.num,
+      }
+      // Send data
+      xhttp.send(JSON.stringify(_data));
+
+      //stop form from reloading the page
+      e.preventDefault();
+      e.stopImmediatePropagation()
+
+      //Reset the form inputs to be empty
+      form.reset()
+    })
   </script>
 
 </body>

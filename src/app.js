@@ -90,10 +90,14 @@ app.post('/users/votes',json_parser,(req,res) => {
 });
 
 app.put('/users',json_parser,(req,res) => {
-   let db_res = users_query.insert_users(req.body.user_id,req.body.num);   
+  let user = {
+    user_id: req.body.user_id,
+    num: req.body.num
+  }
+   let db_res = users_query.insert_users(pool,user);   
    db_res.then(rows => {
       res.send(JSON.stringify(rows.data));
-      res.client.release();
+      rows.client.release();
    })
    .catch((err) => {
       let msg = 'internal server error';

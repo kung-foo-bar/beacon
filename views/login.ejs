@@ -1,29 +1,15 @@
 <div id="login_form" class="login_page">
   <div class="form_box">
     <div class="button_box">
-      <div id="btn"></div>
-      <button type="button" onclick="login()" class="toggle-btn">
-        <h6>Login</h6>
-      </button>
-      <button type="button" onclick="signup()" class="toggle-btn">
-        <h6>Sign Up</h6>
+      <button type="button" class="toggle-btn">
+        <h6>Add Account</h6>
       </button>
     </div>
 
-    <form id="login" class="input_login">
-      <input type="email" class="input" placeholder="Email Address" required>
-      <input type="password" class="input" placeholder="Enter Password" required>
-      <button type="submit" class="submit_button">Log In</button>
+    <form id="login" class="input_login" >
+      <input type="text" class="input" placeholder="User Name"  name="user_id" required>
+      <input type="tel" class="input" placeholder="Phone Number" name="num" required>
+      <button type="submit" class="submit_button">Add Account</button>
     </form>
-
-    <form id="signup" class="input_signup">
-      <input type="text" class="input" placeholder="Full Name" required>
-      <input type="email" class="input" placeholder="Email Address" required>
-      <input type="autocomplete" class="input" placeholder="Home Address" onfocus="geolocate()" required>
-      <input type="password" class="input" placeholder="Enter Password" required>
-      <input type="password" class="input" placeholder="Confirm Password" required>
-      <button type="submit" class="submit_button">Sign Up</button>
-    </form>
-
   </div>
 </div>
