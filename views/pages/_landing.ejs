@@ -88,21 +88,13 @@
     <script>
       // ============================================== Classes ==============================================
       class Post {
-        constructor(_firstName, _lastName, _category, _numberOfVotes, _text) {
-          this.firstName = _firstName;
-          this.lastName = _lastName;
-          this.category = _category;
-          this.numberOfVotes = _numberOfVotes;
-          this.text = _text;
+        constructor(_title, _creator_id, _asignee_id) {
+          this.title = _title;
+          this.creator_id = _creator_id;
+          this.asignee_id = _asignee_id;
         }
       }
       
-      class Comment {
-        constructor(_name, _comment){
-          this.name =_name;
-          this.Comment = _comment;
-        }
-      }
       // ============================================== Dom Elements ==============================================
       //filter section
       let waterFilterButton = document.getElementById("water_filter");
@@ -111,6 +103,7 @@
       let transportFilterButton = document.getElementById("transport_filter");
       let crimeFilterButton = document.getElementById("crime_filter");
       let filterButtons = document.querySelectorAll(".filterButtons");
+      let home = document.getElementById("home");
 
       //Feed section
       let userName = document.querySelectorAll(".user_name");
@@ -123,91 +116,58 @@
 
 
       // ============================================== Window EventListener ==============================================
-      // window.addEventListener('load', (event) =>{
-      //   //Create Request 
-      //   const xhttp = new XMLHttpRequest();
-
-      //   xhttp.open("POST", "", true); // This is the route to post to
-
-      //   xhttp.setRequestHeader("Accept", "application/json");
-      //   xhttp.setRequestHeader('Content-type', 'application/json');
-
-      //   xhttp.onload = function () {
-      //     //Get response from server
-      //     let res = JSON.parse(this.responseText) ;
-      //     //Create JSON Objects from response
-      //     for (const [key, value] of Object.entries(res)){
-      //       //Add posts to feed
-      //       addPost(value); 
-      //     }
-      //     //Add other Eventlisteners 
-      //     incrementVote(); // Make votes able to increment
-      //     addPostEvent(); // Make comments show for the right post when clicked
-      //   }
-
-      //   // Request object to be sent to server
-      //   let req = {
-      //     category: "load",
-      //   }
-      //   // Send Request
-      //   xhttp.send(JSON.stringify(req));
-      // })
+      window.addEventListener('load', (event) =>{
+        getAllPosts()
+      })
+      home.addEventListener('click', (e)=>{
+        getAllPosts();
+      })
+      
       // ============================================== Filter EventListener ==============================================
       // Query for post with a certain #hashtag
       filterButtons.forEach(filterButton =>{ 
         filterButton.addEventListener('click', (e)=>{
           //hashtag to be Queried for
           let hashtag = filterButton.id; // Gets the id of the button that was clicked
-
-          //Create Request 
-          const xhttp = new XMLHttpRequest();
-
-          xhttp.open("POST", "issues", true);
-
-          xhttp.setRequestHeader("Accept", "application/json");
-          xhttp.setRequestHeader('Content-type', 'application/json');
-
-          xhttp.onload = function () {
-            //Get response from server
-            let res = JSON.parse(this.responseText)
-            console.log(res)
-            //Clear all the posts on the page
-            clearPosts()
-            //Create JSON Objects from response
-            for (const [key, value] of Object.entries(res)){
-              //Add posts to feed
-              addPost(value); 
-            }
-            //Add other Eventlisteners 
-            incrementVote(); // Make votes able to increment
-            addPostEvent(); // Make comments show for the right post when clicked
-          }
-
-          let req = {
-            issue_type: hashtag,
-          }
-
-          // Send data
-          xhttp.send(JSON.stringify(req));
+          filterIssues();
         })
       })
-    
+  
       // ============================================== Functions ==============================================
       //Add Posts
       function addPost(obj){
-        feed.innerHTML += `
-        <div class='post'>
-          <div class="post_header">
-              <p class="user_name">${obj.creator_id}</p>
-              <p class="category">#${obj.issue_type}</p>
-          </div>
-          <div class="post_main">
-              <p>${obj.msg}</p>
-          </div>
-          <div class="post_footer">
-              <p class="votes">${obj.numberOfVotes}</p>
-          </div>
-        </div>`
+        //Create Request 
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", "votes", false);
+
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader('Content-type', 'application/json');
+        xhttp.onload = function () {
+          console.log()
+          let res = this.response;
+          feed.innerHTML += `
+          <div class='post'>
+            <div class="post_header">
+                <p class="user_name">${obj.creator_id}</p>
+                <p class="category">#${obj.issue_type}</p>
+                <p class="category">${obj.title}</p>
+            </div>
+            <div class="post_main">
+                <p>${obj.msg}</p>
+            </div>
+            <div class="post_footer">
+                <p class="votes">${res}</p>
+            </div>
+          </div>`
+        }
+          let req = {
+            title: obj.title,
+            creator_id: obj.creator_id, 
+            asignee_id: obj.asignee_id, 
+          }; 
+          // Send data
+          xhttp.send(JSON.stringify(req));
       }
 
       function addPostEvent(){
@@ -250,6 +210,67 @@
               voteButton.innerHTML++; 
             })
           })
+      }
+      function getAllPosts(){
+        //Create Request 
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "issues/all", true); // This is the route to post to
+
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader('Content-type', 'application/json');
+
+        xhttp.onload = function () {
+          //Get response from server
+          let res = JSON.parse(this.responseText) ;
+          //Create JSON Objects from response
+          for (const [key, value] of Object.entries(res)){
+            //Add posts to feed
+            addPost(value); 
+          }
+          //Add other Eventlisteners 
+          incrementVote(); // Make votes able to increment
+          addPostEvent(); // Make comments show for the right post when clicked
+        }
+
+        // Request object to be sent to server
+        let req = {
+          category: "load",
+        }
+        // Send Request
+        xhttp.send(JSON.stringify(req));
+      }
+      function filterIssues(){
+        //Create Request 
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "issues", true);
+
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader('Content-type', 'application/json');
+
+        xhttp.onload = function () {
+          //Get response from server
+          let res = JSON.parse(this.responseText)
+          // console.log(res)
+          //Clear all the posts on the page
+          clearPosts()
+          //Create JSON Objects from response
+          for (const [key, value] of Object.entries(res)){
+            //Add posts to feed
+            addPost(value); 
+          }
+          //Add other Eventlisteners 
+          incrementVote(); // Make votes able to increment
+          addPostEvent(); // Make comments show for the right post when clicked
+          }
+
+          let req = {
+            issue_type: hashtag,
+          }
+
+          // Send data
+          xhttp.send(JSON.stringify(req));
       }
     </script>
 </body>

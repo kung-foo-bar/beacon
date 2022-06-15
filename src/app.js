@@ -1,19 +1,20 @@
 // imports
 import express, { json } from 'express';
 import bodyParser from 'body-parser';
-import expressLayouts from 'express-ejs-layouts';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import expressLayouts  from 'express-ejs-layouts';
+import {dirname} from 'path';
+import {fileURLToPath} from 'url';
 import 'dotenv/config';
 import process from 'node:process';
 
 import * as db_host from './db_host.js';
 import * as issue_server from './routes/issues/issues_server.js';
-
+import * as issues_query from './db_query/issues/query_db.js';
+import * as users_query from './db_query/users/query_db.js';
 import * as db_common from './db_common.js';
+import * as db_err from './db_err.js';
 
-const __dirname = dirname(fileURLToPath(
-    import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = process.env.PORT || 8000;
 
@@ -40,7 +41,7 @@ function report_err(err,res,msg){
 
 function db_resolve(db_res,express_res){
    db_res.then(rows =>{
-      // console.log(rows);
+      console.log(rows.data);
       express_res.send(JSON.stringify(rows.data));
       rows.client.release();
    })
@@ -51,22 +52,22 @@ function db_resolve(db_res,express_res){
 
 // Navigation | Route to pages
 app.get('', (req, res) => {
-    res.render('landing', { layout: './pages/_landing', title: 'Homepage' });
+  res.render('landing', { layout:'./pages/_landing',title: 'Homepage'});
 })
 app.get('/about', (req, res) => {
-    res.render('about', { layout: './pages/_about', title: 'About' })
+  res.render('about', { layout: './pages/_about', title: 'About' })
 })
 app.get('/rr', (req, res) => {
-    res.render('rr', { layout: './pages/_rr', title: 'R/R' })
+  res.render('rr', { layout: './pages/_rr', title: 'R/R' })
 })
 app.get('/forum', (req, res) => {
-    res.render('forum', { layout: './pages/_forum', title: 'Forum' })
+  res.render('forum', { layout: './pages/_forum', title: 'Forum' })
 })
 app.get('/donate', (req, res) => {
-    res.render('donate', { layout: './pages/_donate', title: 'Donate' })
+  res.render('donate', { layout: './pages/_donate', title: 'Donate' })
 })
 app.get('/faq', (req, res) => {
-    res.render('faq', { layout: './pages/_faq', title: 'FAQs' })
+  res.render('faq', { layout: './pages/_faq', title: 'FAQs' })
 })
 
 app.get('/users',json_parser,(req,res) => {
@@ -128,6 +129,10 @@ app.post('/issues',json_parser,(req,res) => {
    db_resolve(db_res,res);
 });
 
+app.post('/issues/all',(req,res) => {
+   let db_res = issues_query.select_issues(pool);
+   db_resolve(db_res,res);
+})
 app.delete('/issues',json_parser,(req,res) =>{
    let issue = {
       title: req.body.title, 
@@ -157,20 +162,29 @@ app.put('/votes',json_parser,(req,res) => {
       if (db_err.get_db_err(err) === db_err.PG_ERR_DUP) msg = "cannot vote twice on the same issue";
       report_err(err,res,msg);
    });
-
-app.get('/login', (req, res) => {
-    res.render('login', { layout: './pages/_login', title: 'Login' })
-})
-
-});
-app.post('/rr', jsonParser, (req, res) => {
-    console.log(req.body);
-    res.send(JSON.stringify(req.body));
 });
 
-// app.get('/report', (req, res) => {
-//   res.render('report', { layout:'./pages/_report',  title: 'Report/Request'});
-// })
+app.get('/votes',json_parser,(req,res) => {
+   let issue = {
+     title: req.body.title, 
+     creator_id: req.body.creator_id, 
+     asignee_id: req.body.asignee_id 
+   }; 
+
+   let db_res = issues_query.count_votes(pool,issue);
+   db_resolve(db_res,res);
+});
+
+app.delete('/votes',json_parser,(req,res) => {
+   let v_id = req.body.voter_id;
+   let issue = {
+      title: req.body.title,
+      creator_id: req.body.creator_id,
+      asignee_id: req.body.asignee_id
+   };
+   let db_res = issues_query.remove_vote(pool,issue,v_id);
+   db_resolve(db_res,res);
+});
 // -------- any other pages should be set below here --------
 
 // app.get('/about', (req, res) => {
@@ -180,22 +194,5 @@ app.post('/rr', jsonParser, (req, res) => {
 //   res.render('contact', { layout: './layouts/_contact', title: 'Contact Page' })
 // })
 
-app.post('/issues', json_parser, (req, res) => {
-    let oldest = new Date();
-    oldest.setTime(req.body.after);
-    let db_res = issue_server.get_within_period(pool, oldest);
-    db_res.then(rows => {
-            res.send(JSON.stringify(rows.data));
-            rows.client.release();
-        })
-        .catch((err) => {
-            db_common.log_pg_err(err);
-            let json_err = { status: 500, err: 'internal server error' };
-            res.send(JSON.stringify(json_err));
-        });
-});
-
 // Listen on port 8000
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
-
-// npm start
