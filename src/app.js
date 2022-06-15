@@ -24,13 +24,13 @@ let pool = db_host.open_db();
 
 let json_parser = bodyParser.json();
 // Static Files
-app.use(express.static('public'));
-app.use('/img', express.static(__dirname + 'public/img'));
+app.use(express.static("public"));
+app.use("/img", express.static(__dirname + "public/img"));
 
 // Set Views | Templating Engine
 app.use(expressLayouts);
-app.set('layout', './pages/_landing');
-app.set('view engine', 'ejs');
+app.set("layout", "./pages/_landing");
+app.set("view engine", "ejs");
 
 function report_err(err,res,msg){
    db_common.log_pg_err(err);
