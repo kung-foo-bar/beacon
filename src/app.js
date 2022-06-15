@@ -168,17 +168,29 @@ app.post('/rr', jsonParser, (req, res) => {
     res.send(JSON.stringify(req.body));
 });
 
-// app.get('/report', (req, res) => {
-//   res.render('report', { layout:'./pages/_report',  title: 'Report/Request'});
-// })
-// -------- any other pages should be set below here --------
+app.get('/votes',json_parser,(req,res) => {
+   let issue = {
+     title: req.body.title, 
+     creator_id: req.body.creator_id, 
+     asignee_id: req.body.asignee_id 
+   }; 
 
-// app.get('/about', (req, res) => {
-//   res.render('about', { layout: './layouts/_about', title: 'About' })
-// })
-// app.get('/contact', (req, res) => {
-//   res.render('contact', { layout: './layouts/_contact', title: 'Contact Page' })
-// })
+   let db_res = issues_query.count_votes(pool,issue);
+   db_resolve(db_res,res);
+});
+
+
+app.delete('/votes',json_parser,(req,res) => {
+   let v_id = req.body.voter_id;
+   let issue = {
+      title: req.body.title,
+      creator_id: req.body.creator_id,
+      asignee_id: req.body.asignee_id
+   };
+   let db_res = issues_query.remove_vote(pool,issue,v_id);
+   db_resolve(db_res,res);
+});
+// -------- any other pages should be set below here --------
 
 app.post('/issues', json_parser, (req, res) => {
     let oldest = new Date();
@@ -198,4 +210,3 @@ app.post('/issues', json_parser, (req, res) => {
 // Listen on port 8000
 app.listen(port, () => console.log(`Listening at http://localhost:${port}`));
 
-// npm start
