@@ -24,7 +24,7 @@ export async function insert_issues(pool,issue){
 
 export async function select_issues(pool){
    const client = await pool.connect();
-   let raw_data = await pool.query('SELECT * FROM issues');
+   let raw_data = await client.query('SELECT * FROM issues');
    return {client: client, data: raw_data.rows};
 }
 
