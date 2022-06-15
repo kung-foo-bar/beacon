@@ -86,19 +86,25 @@
 
 <!-- My Script -->
     <script>
-      // Post Class
+      // ============================================== Classes ==============================================
       class Post {
-      constructor(_firstName, _lastName, _category, _numberOfVotes, _text) {
-        this.firstName = _firstName;
-        this.lastName = _lastName;
-        this.category = _category;
-        this.numberOfVotes = _numberOfVotes;
-        this.text = _text;
+        constructor(_firstName, _lastName, _category, _numberOfVotes, _text) {
+          this.firstName = _firstName;
+          this.lastName = _lastName;
+          this.category = _category;
+          this.numberOfVotes = _numberOfVotes;
+          this.text = _text;
+        }
       }
-    }
       
-      // Getting Dom elements
-      //filter buttons
+      class Comment {
+        constructor(_name, _comment){
+          this.name =_name;
+          this.Comment = _comment;
+        }
+      }
+      // ============================================== Dom Elements ==============================================
+      //filter section
       let waterFilterButton = document.getElementById("water_filter");
       let foodFilterButton = document.getElementById("food_filter");
       let wasteFilterButton = document.getElementById("waste_filter");
@@ -106,40 +112,74 @@
       let crimeFilterButton = document.getElementById("crime_filter");
       let filterButtons = document.querySelectorAll(".filterButtons");
 
-      //Feed elements
+      //Feed section
       let userName = document.querySelectorAll(".user_name");
       let category = document.querySelectorAll(".category");
-      let votes = document.querySelectorAll(".votes");
       let text = document.querySelectorAll(".text");
       let feed = document.getElementById("posts_feed");
-      
 
-      //Add event listeners
-      //(1.)
-      votes.forEach(voteButton =>{
-        voteButton.addEventListener('click', (e)=>{
-          voteButton.innerHTML++; 
-        })
+      //Comment section
+      let extra = document.querySelector(".extra");
+
+
+      // ============================================== Window EventListener ==============================================
+      window.addEventListener('load', (event) =>{
+        //Create Request 
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "", true); // This is the route to post to
+
+        xhttp.setRequestHeader("Accept", "application/json");
+        xhttp.setRequestHeader('Content-type', 'application/json');
+
+        xhttp.onload = function () {
+          //Get response from server
+          let res = JSON.parse(this.responseText) ;
+          //Create JSON Objects from response
+          for (const [key, value] of Object.entries(res)){
+            //Add posts to feed
+            addPost(value); 
+          }
+          //Add other Eventlisteners 
+          incrementVote(); // Make votes able to increment
+          addPostEvent(); // Make comments show for the right post when clicked
+        }
+
+        // Request object to be sent to server
+        let req = {
+          category: "load",
+        }
+        // Send Request
+        xhttp.send(JSON.stringify(req));
       })
-      //(2.)
-      filterButtons.forEach(filterButton =>{ // Query for post with a certain #hashtag
+      // ============================================== Filter EventListener ==============================================
+      // Query for post with a certain #hashtag
+      filterButtons.forEach(filterButton =>{ 
         filterButton.addEventListener('click', (e)=>{
-          let hashtag = filterButton.id; //hashtag to be Queried for
+          //hashtag to be Queried for
+          let hashtag = filterButton.id; // Gets the id of the button that was clicked
 
           //Create Request 
           const xhttp = new XMLHttpRequest();
 
-          xhttp.open("POST", "", true);
+          xhttp.open("POST", "test", true);
 
           xhttp.setRequestHeader("Accept", "application/json");
           xhttp.setRequestHeader('Content-type', 'application/json');
 
           xhttp.onload = function () {
-            let res = JSON.parse(this.responseText) 
+            //Get response from server
+            let res = JSON.parse(this.responseText)
+            //Clear all the posts on the page
             clearPosts()
+            //Create JSON Objects from response
             for (const [key, value] of Object.entries(res)){
+              //Add posts to feed
               addPost(value); 
             }
+            //Add other Eventlisteners 
+            incrementVote(); // Make votes able to increment
+            addPostEvent(); // Make comments show for the right post when clicked
           }
 
           let req = {
@@ -150,34 +190,12 @@
           xhttp.send(JSON.stringify(req));
         })
       })
-      //(3.)
-      window.addEventListener('load', (event) =>{
-        //Create Request 
-        const xhttp = new XMLHttpRequest();
-
-        xhttp.open("POST", "", true);
-
-        xhttp.setRequestHeader("Accept", "application/json");
-        xhttp.setRequestHeader('Content-type', 'application/json');
-
-        xhttp.onload = function () {
-          let res = JSON.parse(this.responseText) 
-          for (const [key, value] of Object.entries(res)){
-            addPost(value); 
-          }
-        }
-        let req = {
-            category: "load",
-          }
-        // Send data
-        xhttp.send(JSON.stringify(req));
-      })
-      
-            
-      // Functions 
+    
+      // ============================================== Functions ==============================================
+      //Add Posts
       function addPost(obj){
         feed.innerHTML += `
-        <div class="post">
+        <div class='post'>
           <div class="post_header">
               <p class="user_name">${obj.firstName + " "} ${obj.lastName}</p>
               <p class="category">#${obj.category}</p>
@@ -190,8 +208,47 @@
           </div>
         </div>`
       }
+
+      function addPostEvent(){
+        //(4.) show comments when clicked on a post
+        let post = document.querySelectorAll(".post");
+        post.forEach(_post =>{
+          _post.addEventListener('click', (e) => {
+            clearComments();
+            addComments();
+          })
+        })
+      }
+      function addComments(){
+        extra.innerHTML += 
+        `
+        <div class="comments">
+          <div class="comment_header">
+              <p class="commenter_name">Caleb</p>
+          </div>
+          <div class="comment_main">
+              <p>This is a Test Comment</p>
+          </div>
+        </div>
+        `
+      }
+      //(2.) Clear Posts
       function clearPosts(){
         feed.innerHTML = ``;
+      }
+
+      //(3.) Clear comments
+      function clearComments(){
+        extra.innerHTML = ``;
+      }
+      function incrementVote(){
+        //(1.) Click on votes
+        let votes = document.querySelectorAll(".votes");
+          votes.forEach(voteButton =>{
+            voteButton.addEventListener('click', (e)=>{
+              voteButton.innerHTML++; 
+            })
+          })
       }
     </script>
 </body>

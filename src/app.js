@@ -64,9 +64,7 @@ app.post('',jsonParser,(req,res)=>{
   // Step 1 : Query the back end for feeds of a certain category 
   // Step 2 : The back end sends all feeds fitting and putts it in result; which will be an empty array inisialised all the time
   // Step 3 : Send the array to the front end
-  let result = []
-  if(query === "load"){
-    result = [
+  let result = [
       {
       firstName: "Chidz",
       lastName: "Okoh",
@@ -89,33 +87,34 @@ app.post('',jsonParser,(req,res)=>{
         text: "Carine's issue"
       }
     ] 
- }
-  else{
-    result = [
-      {
-      firstName: "Rose",
-      lastName: "kaggwa",
-      category: "Water",
-      numberOfVotes: 6,
-      text: "Rosette's issue"
-      },
-      {
-        firstName: "Caleb",
-        lastName: "Adeyemo",
-        category: "Water",
-        numberOfVotes: 4,
-        text: "Caleb's issue"
-      },
-      {
-        firstName: "Carine",
-        lastName: "Loo",
-        category: "Water",
-        numberOfVotes: 8,
-        text: "Carine's issue"
-      }
-  ]
-  }
   
+  res.send(result);
+});
+
+app.post('/test',jsonParser,(req,res)=>{
+  let result = [
+    {
+    firstName: "Rose",
+    lastName: "kaggwa",
+    category: "Water",
+    numberOfVotes: 6,
+    text: "Rosette's issue"
+    },
+    {
+      firstName: "Caleb",
+      lastName: "Adeyemo",
+      category: "Water",
+      numberOfVotes: 4,
+      text: "Caleb's issue"
+    },
+    {
+      firstName: "Carine",
+      lastName: "Loo",
+      category: "Water",
+      numberOfVotes: 8,
+      text: "Carine's issue"
+    }
+  ]
   res.send(result);
 });
 
