@@ -14,7 +14,6 @@ export function open_db(){
    console.log(db_host)
 
    if(db_con_str){
-      console.log("here")
       const pool = new Pool({ 
          db_con_str
       });
