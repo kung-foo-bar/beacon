@@ -2,8 +2,7 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -73,7 +72,6 @@ a {
   border-radius: 50%;
   background-color: #49525a;
   opacity: 0;
-  -webkit-transition: all 0.4 ease-in-out 0s;
   transition: all 0.4 ease-in-out 0s;
 }
 
@@ -92,7 +90,7 @@ a {
 
 .filter {
   position: absolute;
-  height: 75vh;
+  height: 100vh;
   top: 0;
   left: 0;
   background-color: black;
@@ -101,22 +99,22 @@ a {
 
 .posts {
   position: absolute;
-  height: 75vh;
+  height: 100vh;
   overflow: scroll;
   top: 0;
   left: 25%;
   text-align: center;
   background-color: #252525;
-  padding: 25px;
+  padding: 30px;
 }
 
 .extra {
   position: absolute;
-  height: 75vh;
+  height: 100vh;
   top: 0;
   right: 0;
+  background-color: black;
   text-align: center;
-  padding: 15px;
 }
 
 #filter_navigation {
@@ -135,8 +133,6 @@ a {
 }
 
 #filters p, #navigation_profile p {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   margin-left: 35%;
 }
@@ -160,7 +156,7 @@ a {
   outline: none;
 }
 
-#filters button a {
+#filter button a {
   color: white;
 }
 
@@ -180,15 +176,8 @@ a {
   width: 100%;
   height: 10%;
   padding: 5% 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-}
-
-.user_name, .commenter_name {
-  color: #C76E95;
+  justify-content: space-around;
 }
 
 .post_main {
@@ -210,43 +199,17 @@ a {
   cursor: pointer;
 }
 
-.comments {
-  height: 20%;
-  margin-bottom: 20px;
-  background-color: black;
-  border-radius: 10px;
-  border: 2px solid whitesmoke;
-}
-
-.comment_header {
-  text-align: left;
-  padding-left: 5%;
-  border-bottom: 2px solid whitesmoke;
-}
-
-.comment_main {
-  background-color: black;
-  height: 100%;
-  text-align: left;
-  padding-left: 5%;
-  padding-top: 2%;
-}
-
 .wrapper {
   width: 50rem;
   margin: auto;
   border-radius: 1rem;
   height: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
 #category {
   width: 20%;
   text-align: center;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   border: 1px solid white;
   border-radius: 20px 0 0 20px;
@@ -295,7 +258,126 @@ a {
   border-radius: 2rem;
   outline: none;
   color: black;
-  -webkit-transition: 0.25s;
   transition: 0.25s;
+}
+
+.form_box {
+  width: 400px;
+  height: 480px;
+  position: relative;
+  margin: 2% auto;
+  background: rgba(90, 89, 86, 0.3);
+  padding: 10px;
+  overflow: hidden;
+}
+
+.button_box {
+  width: 250px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #ff61241f;
+  border-radius: 30px;
+}
+
+.toggle-btn {
+  padding: 5px 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  color: white;
+}
+
+h6 {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+#btn {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 55%;
+  height: 100%;
+  background: #F3C693;
+  border-radius: 30px;
+  transition: 0.5s;
+}
+
+.input_login {
+  top: 150px;
+  position: absolute;
+  width: 280px;
+  transition: .5s;
+}
+
+.input_signup {
+  top: 120px;
+  position: absolute;
+  width: 280px;
+  transition: .5s;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #999;
+  outline: none;
+  background: transparent;
+}
+
+.submit_button:focus {
+  border-color: aliceblue;
+}
+
+.submit_button {
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: #F3C693;
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+  margin-top: 20px;
+  transition: 0.25s;
+}
+
+.submit_button:hover {
+  color: white;
+  border: 2px solid #F3C693;
+  background-color: #F3C693;
+  cursor: pointer;
+}
+
+span {
+  color: black;
+  font-size: 12px;
+  bottom: 68px;
+  position: absolute;
+}
+
+#login {
+  left: 50px;
+}
+
+#login input {
+  color: white;
+  font-size: 15;
+}
+
+#signup {
+  left: 450px;
+}
+
+#signup input {
+  color: white;
+  font-size: 15;
 }
 /*# sourceMappingURL=style.css.map */

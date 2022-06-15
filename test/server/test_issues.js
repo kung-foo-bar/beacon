@@ -28,16 +28,22 @@ const test_key = [test_issue[0],test_issue[4],test_issue[5]];
 async function make_test_data(pool){
 
    let db_res = await issues_query.insert_issues(pool,test_issue);
-   console.log(db_res.data);
+   //console.log(db_res.data);
    assert.deepEqual(db_res.data.length,1);
    db_res.client.release();
 
    db_res = await issues_query.insert_issues(pool,test_issue_1);
-   console.log(db_res.data);
+   //console.log(db_res.data);
    assert.deepEqual(db_res.data.length,1);
    db_res.client.release();
 }
 
+async function should_find_data(pool){
+   let db_res = await issues_query.select_issues(pool);
+   let test_rows = db_res.data.filter(row => row.issue_type === test_issue_1.type || row.issue_type ===test_issue.type);
+   assert.deepEqual(test_rows.length,2);
+   db_res.client.release();
+}
 
 async function should_delete_test_data(pool){
    let db_res = await issues_query.delete_issue(pool,test_issue);
@@ -98,6 +104,7 @@ async function should_filter_issues(pool){
 let pool = db_host.open_db();
 await delete_test_data(pool);
 await make_test_data(pool);
+await should_find_data(pool);
 await should_add_vote(pool);
 await should_have_three_votes(pool);
 await should_list_voted_issues(pool);
