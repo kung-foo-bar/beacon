@@ -92,7 +92,7 @@ a {
 
 .filter {
   position: absolute;
-  height: 100vh;
+  height: 75vh;
   top: 0;
   left: 0;
   background-color: black;
@@ -101,22 +101,22 @@ a {
 
 .posts {
   position: absolute;
-  height: 100vh;
+  height: 75vh;
   overflow: scroll;
   top: 0;
   left: 25%;
   text-align: center;
   background-color: #252525;
-  padding: 30px;
+  padding: 25px;
 }
 
 .extra {
   position: absolute;
-  height: 100vh;
+  height: 75vh;
   top: 0;
   right: 0;
-  background-color: black;
   text-align: center;
+  padding: 15px;
 }
 
 #filter_navigation {
@@ -160,7 +160,7 @@ a {
   outline: none;
 }
 
-#filter button a {
+#filters button a {
   color: white;
 }
 
@@ -187,6 +187,10 @@ a {
       justify-content: space-around;
 }
 
+.user_name, .commenter_name {
+  color: #C76E95;
+}
+
 .post_main {
   height: 80%;
   padding: 40% 0;
@@ -204,6 +208,28 @@ a {
 
 .votes:hover {
   cursor: pointer;
+}
+
+.comments {
+  height: 20%;
+  margin-bottom: 20px;
+  background-color: black;
+  border-radius: 10px;
+  border: 2px solid whitesmoke;
+}
+
+.comment_header {
+  text-align: left;
+  padding-left: 5%;
+  border-bottom: 2px solid whitesmoke;
+}
+
+.comment_main {
+  background-color: black;
+  height: 100%;
+  text-align: left;
+  padding-left: 5%;
+  padding-top: 2%;
 }
 
 .wrapper {
