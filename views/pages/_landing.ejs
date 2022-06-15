@@ -18,17 +18,14 @@
 
   <!-- header start -->
   <header class="header-area">
-    <div class="nav-area">
-      <!-- navbar start -->
+    <div class="nav-area">   <!-- navbar start -->
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid">
             <a class="navbar-brand" href="">
               <img class="logo-img" src="img/Logo.png" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-              aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -57,22 +54,21 @@
         </nav>
       </div>
     </div> <!-- navbar end -->
-    <div class="header-hero">
-      <!-- home start -->
+    <div class="header-hero"> <!-- home start -->
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-10">
 
           </div>
           <div class="col-lg-3 col-md-6">
-
+            
           </div>
         </div>
       </div>
 
 
     </div> <!-- home end -->
-  </header>
+  </header> 
   <!-- header end -->
   <main>
     <%- body %>
@@ -88,118 +84,118 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-  <!-- My Script -->
-  <script>
-    // ============================================== Classes ==============================================
-    class Post {
-      constructor (_firstName, _lastName, _category, _numberOfVotes, _text) {
-        this.firstName = _firstName;
-        this.lastName = _lastName;
-        this.category = _category;
-        this.numberOfVotes = _numberOfVotes;
-        this.text = _text;
+<!-- My Script -->
+    <script>
+      // ============================================== Classes ==============================================
+      class Post {
+        constructor(_firstName, _lastName, _category, _numberOfVotes, _text) {
+          this.firstName = _firstName;
+          this.lastName = _lastName;
+          this.category = _category;
+          this.numberOfVotes = _numberOfVotes;
+          this.text = _text;
+        }
       }
-    }
-
-    class Comment {
-      constructor (_name, _comment) {
-        this.name = _name;
-        this.Comment = _comment;
+      
+      class Comment {
+        constructor(_name, _comment){
+          this.name =_name;
+          this.Comment = _comment;
+        }
       }
-    }
-    // ============================================== Dom Elements ==============================================
-    //filter section
-    let waterFilterButton = document.getElementById("water_filter");
-    let foodFilterButton = document.getElementById("food_filter");
-    let wasteFilterButton = document.getElementById("waste_filter");
-    let transportFilterButton = document.getElementById("transport_filter");
-    let crimeFilterButton = document.getElementById("crime_filter");
-    let filterButtons = document.querySelectorAll(".filterButtons");
+      // ============================================== Dom Elements ==============================================
+      //filter section
+      let waterFilterButton = document.getElementById("water_filter");
+      let foodFilterButton = document.getElementById("food_filter");
+      let wasteFilterButton = document.getElementById("waste_filter");
+      let transportFilterButton = document.getElementById("transport_filter");
+      let crimeFilterButton = document.getElementById("crime_filter");
+      let filterButtons = document.querySelectorAll(".filterButtons");
 
-    //Feed section
-    let userName = document.querySelectorAll(".user_name");
-    let category = document.querySelectorAll(".category");
-    let text = document.querySelectorAll(".text");
-    let feed = document.getElementById("posts_feed");
+      //Feed section
+      let userName = document.querySelectorAll(".user_name");
+      let category = document.querySelectorAll(".category");
+      let text = document.querySelectorAll(".text");
+      let feed = document.getElementById("posts_feed");
 
-    //Comment section
-    let extra = document.querySelector(".extra");
+      //Comment section
+      let extra = document.querySelector(".extra");
 
 
-    // ============================================== Window EventListener ==============================================
-    // window.addEventListener('load', (event) =>{
-    //   //Create Request 
-    //   const xhttp = new XMLHttpRequest();
+      // ============================================== Window EventListener ==============================================
+      // window.addEventListener('load', (event) =>{
+      //   //Create Request 
+      //   const xhttp = new XMLHttpRequest();
 
-    //   xhttp.open("POST", "", true); // This is the route to post to
+      //   xhttp.open("POST", "", true); // This is the route to post to
 
-    //   xhttp.setRequestHeader("Accept", "application/json");
-    //   xhttp.setRequestHeader('Content-type', 'application/json');
+      //   xhttp.setRequestHeader("Accept", "application/json");
+      //   xhttp.setRequestHeader('Content-type', 'application/json');
 
-    //   xhttp.onload = function () {
-    //     //Get response from server
-    //     let res = JSON.parse(this.responseText) ;
-    //     //Create JSON Objects from response
-    //     for (const [key, value] of Object.entries(res)){
-    //       //Add posts to feed
-    //       addPost(value); 
-    //     }
-    //     //Add other Eventlisteners 
-    //     incrementVote(); // Make votes able to increment
-    //     addPostEvent(); // Make comments show for the right post when clicked
-    //   }
+      //   xhttp.onload = function () {
+      //     //Get response from server
+      //     let res = JSON.parse(this.responseText) ;
+      //     //Create JSON Objects from response
+      //     for (const [key, value] of Object.entries(res)){
+      //       //Add posts to feed
+      //       addPost(value); 
+      //     }
+      //     //Add other Eventlisteners 
+      //     incrementVote(); // Make votes able to increment
+      //     addPostEvent(); // Make comments show for the right post when clicked
+      //   }
 
-    //   // Request object to be sent to server
-    //   let req = {
-    //     category: "load",
-    //   }
-    //   // Send Request
-    //   xhttp.send(JSON.stringify(req));
-    // })
-    // ============================================== Filter EventListener ==============================================
-    // Query for post with a certain #hashtag
-    filterButtons.forEach(filterButton => {
-      filterButton.addEventListener('click', (e) => {
-        //hashtag to be Queried for
-        let hashtag = filterButton.id; // Gets the id of the button that was clicked
+      //   // Request object to be sent to server
+      //   let req = {
+      //     category: "load",
+      //   }
+      //   // Send Request
+      //   xhttp.send(JSON.stringify(req));
+      // })
+      // ============================================== Filter EventListener ==============================================
+      // Query for post with a certain #hashtag
+      filterButtons.forEach(filterButton =>{ 
+        filterButton.addEventListener('click', (e)=>{
+          //hashtag to be Queried for
+          let hashtag = filterButton.id; // Gets the id of the button that was clicked
 
-        //Create Request 
-        const xhttp = new XMLHttpRequest();
+          //Create Request 
+          const xhttp = new XMLHttpRequest();
 
-        xhttp.open("POST", "issues", true);
+          xhttp.open("POST", "issues", true);
 
-        xhttp.setRequestHeader("Accept", "application/json");
-        xhttp.setRequestHeader('Content-type', 'application/json');
+          xhttp.setRequestHeader("Accept", "application/json");
+          xhttp.setRequestHeader('Content-type', 'application/json');
 
-        xhttp.onload = function () {
-          //Get response from server
-          let res = JSON.parse(this.responseText)
-          console.log(res)
-          //Clear all the posts on the page
-          clearPosts()
-          //Create JSON Objects from response
-          for (const [key, value] of Object.entries(res)) {
-            //Add posts to feed
-            addPost(value);
+          xhttp.onload = function () {
+            //Get response from server
+            let res = JSON.parse(this.responseText)
+            console.log(res)
+            //Clear all the posts on the page
+            clearPosts()
+            //Create JSON Objects from response
+            for (const [key, value] of Object.entries(res)){
+              //Add posts to feed
+              addPost(value); 
+            }
+            //Add other Eventlisteners 
+            incrementVote(); // Make votes able to increment
+            addPostEvent(); // Make comments show for the right post when clicked
           }
-          //Add other Eventlisteners 
-          incrementVote(); // Make votes able to increment
-          addPostEvent(); // Make comments show for the right post when clicked
-        }
 
-        let req = {
-          issue_type: hashtag,
-        }
+          let req = {
+            issue_type: hashtag,
+          }
 
-        // Send data
-        xhttp.send(JSON.stringify(req));
+          // Send data
+          xhttp.send(JSON.stringify(req));
+        })
       })
-    })
-
-    // ============================================== Functions ==============================================
-    //Add Posts
-    function addPost(obj) {
-      feed.innerHTML += `
+    
+      // ============================================== Functions ==============================================
+      //Add Posts
+      function addPost(obj){
+        feed.innerHTML += `
         <div class='post'>
           <div class="post_header">
               <p class="user_name">${obj.creator_id}</p>
@@ -212,20 +208,20 @@
               <p class="votes">${obj.numberOfVotes}</p>
           </div>
         </div>`
-    }
+      }
 
-    function addPostEvent() {
-      //(4.) show comments when clicked on a post
-      let post = document.querySelectorAll(".post");
-      post.forEach(_post => {
-        _post.addEventListener('click', (e) => {
-          clearComments();
-          addComments();
+      function addPostEvent(){
+        //(4.) show comments when clicked on a post
+        let post = document.querySelectorAll(".post");
+        post.forEach(_post =>{
+          _post.addEventListener('click', (e) => {
+            clearComments();
+            addComments();
+          })
         })
-      })
-    }
-    function addComments() {
-      extra.innerHTML +=
+      }
+      function addComments(){
+        extra.innerHTML += 
         `
         <div class="comments">
           <div class="comment_header">
@@ -236,26 +232,25 @@
           </div>
         </div>
         `
-    }
-    //(2.) Clear Posts
-    function clearPosts() {
-      feed.innerHTML = ``;
-    }
+      }
+      //(2.) Clear Posts
+      function clearPosts(){
+        feed.innerHTML = ``;
+      }
 
-    //(3.) Clear comments
-    function clearComments() {
-      extra.innerHTML = ``;
-    }
-    function incrementVote() {
-      //(1.) Click on votes
-      let votes = document.querySelectorAll(".votes");
-      votes.forEach(voteButton => {
-        voteButton.addEventListener('click', (e) => {
-          voteButton.innerHTML++;
-        })
-      })
-    }
-  </script>
+      //(3.) Clear comments
+      function clearComments(){
+        extra.innerHTML = ``;
+      }
+      function incrementVote(){
+        //(1.) Click on votes
+        let votes = document.querySelectorAll(".votes");
+          votes.forEach(voteButton =>{
+            voteButton.addEventListener('click', (e)=>{
+              voteButton.innerHTML++; 
+            })
+          })
+      }
+    </script>
 </body>
-
 </html>

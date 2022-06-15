@@ -10,3 +10,14 @@ export async function get_within_period(pool,date){
    let raw_data = await client.query(query);
    return {client: client,data: raw_data.rows};
 }
+
+export async function filter_issues(pool,type){
+   const client = await pool.connect();
+   let query = {
+      text: 'SELECT * FROM Issues where issue_type = $1',
+      values: [type]
+   };
+
+   let raw_data = await client.query(query);
+   return {client: client, data: raw_data.rows};
+}

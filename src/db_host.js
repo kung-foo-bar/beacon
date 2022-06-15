@@ -7,11 +7,22 @@ export function open_db(){
    const db_port = process.env.SYN_DB_PORT;
    const db_host = process.env.SYN_DB_HOST;
    const db_database = process.env.SYN_DB_DB;
+   const db_con_str = process.env.DB_CONNECTION_STRING;
 
-   const connectionString = 'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
+   if(db_con_str){
+      const pool = new Pool({
+         db_con_str
+      });
+      return pool;
+   }
+
 
    const pool = new Pool({
-      connectionString,
+     user: db_user,
+     host: db_host,
+     database: db_database,
+     password: db_pd,
+     port: db_port,
    });
    return pool;
 }
