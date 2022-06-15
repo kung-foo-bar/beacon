@@ -2,8 +2,7 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -73,7 +72,6 @@ a {
   border-radius: 50%;
   background-color: #49525a;
   opacity: 0;
-  -webkit-transition: all 0.4 ease-in-out 0s;
   transition: all 0.4 ease-in-out 0s;
 }
 
@@ -135,8 +133,6 @@ a {
 }
 
 #filters p, #navigation_profile p {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   margin-left: 35%;
 }
@@ -180,11 +176,8 @@ a {
   width: 100%;
   height: 10%;
   padding: 5% 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
 }
 
 .user_name, .commenter_name {
@@ -237,8 +230,6 @@ a {
   margin: 2rem auto;
   border-radius: 1rem;
   height: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -266,7 +257,7 @@ a {
 #content {
   color: white;
   width: 100%;
-  background-color: #708BD7;
+  background-color: #3352BA;
   border-radius: 0 20px 20px 0px;
 }
 
@@ -294,12 +285,13 @@ a {
   border-radius: 2rem;
   outline: none;
   color: black;
-  -webkit-transition: 0.25s;
   transition: 0.25s;
 }
 
 textarea {
+  border: 2px solid white;
   background-color: #4e77d774;
+  width: 50%;
 }
 
 .form_box {
@@ -318,8 +310,7 @@ textarea {
   height: 70px;
   margin: 35px auto;
   position: relative;
-  -webkit-box-shadow: 0 0 20px 9px #75b97c1f;
-          box-shadow: 0 0 20px 9px #75b97c1f;
+  box-shadow: 0 0 20px 9px #75b97c1f;
   border-radius: 30px;
   text-align: center;
   font-size: 2.2rem;
@@ -347,7 +338,6 @@ h6 {
   height: 100%;
   background: #56b55e;
   border-radius: 30px;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -355,7 +345,6 @@ h6 {
   top: 150px;
   position: absolute;
   width: 280px;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -363,7 +352,6 @@ h6 {
   top: 120px;
   position: absolute;
   width: 280px;
-  -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
@@ -394,7 +382,6 @@ h6 {
   outline: none;
   border-radius: 30px;
   margin-top: 20px;
-  -webkit-transition: 0.25s;
   transition: 0.25s;
 }
 
@@ -421,5 +408,122 @@ h6 {
 #signup input {
   color: white;
   font-size: 15;
+}
+
+#pro_intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+}
+
+#pro_intro h2 {
+  font-size: 5rem;
+  color: #C75B80;
+  -webkit-text-stroke: 2px #708BD7;
+}
+
+#ad_page {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.forum-form {
+  color: white;
+  background-color: #3352ba5c;
+  margin: 0.6rem;
+  padding: 1.3rem;
+  border-radius: 5px;
+  border: 1px solid #708bd78d;
+}
+
+.forum-form textarea {
+  margin-top: 1rem;
+  width: 100%;
+  height: 12.5rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  color: black;
+}
+
+.forum-button {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  padding: 0;
+}
+
+.ad_button {
+  background-color: #C75B80;
+  margin: 5px 0 0 0;
+  padding: 4px;
+  width: 15%;
+  border: 1px solid #708BD7;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.ad_button:hover {
+  color: black;
+}
+
+#ad_page div {
+  display: grid;
+  grid-gap: 2em;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.ad_list {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ad {
+  margin: 0.5rem;
+  background: #3352BA;
+  padding: 10px;
+  border: 2px solid #4E78D7;
+  border-radius: .3em;
+  box-shadow: 6px 6px 20px #000000;
+  font-size: 1rem;
+}
+
+.ad_info {
+  margin-top: 0;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.ad_name {
+  color: black;
+  width: 26%;
+  margin-left: 3px;
+  padding: 0.2rem;
+  font-size: 15px;
+}
+
+section button {
+  color: white;
+  background: #C75B80;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #708BD7;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section button:hover {
+  background: #708BD7;
+  color: white;
 }
 /*# sourceMappingURL=style.css.map */

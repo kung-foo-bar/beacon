@@ -76,6 +76,120 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-</body>
 
+  <script>
+    // Forum page js
+    // Selectors
+    const adInput = document.querySelector(".ad_input"); // textarea from form
+    const adName = document.getElementById("name"); // name from form
+    const adContact = document.getElementById("contact"); // phone number from form
+    const adAddress = document.getElementById("address"); // address from the form
+    const adButton = document.querySelector(".ad_button"); // button that submits the form
+    const adList = document.querySelector(".ad_list"); // empty UL that would be added to to make our information cards
+
+    // Event Listeners
+    adButton.addEventListener("click", createAd); // acts on the add button and this function that adds the card information
+    adList.addEventListener("click", deleteCheck); // acts on the delete button to delete an information card
+    window.addEventListener("load", displayCards);
+
+    // Functions
+    // Function to create the information cards
+    let cards = []; // list holding json info of cards
+    let num = 0;
+    function createAd(event) {
+
+      // store card in json file 
+      const form = document.querySelector("form");
+      // prevents the default action of form from submitting and reloading
+      event.preventDefault();
+      const data = new FormData(form);
+      const value = Object.fromEntries(data.entries());
+      const newData = JSON.stringify(value); // turn data entered by user into json format
+      cards.push(newData); // add data to the json list
+      console.log(cards);
+      sessionStorage.setItem(num.toString(), newData);
+
+      // create cards and display to user
+      // Create a Div that holds the li that would be created and the delete button
+      const adDiv = document.createElement("div");
+      adDiv.classList.add("ad");
+
+      // Create Li; it is the text area of the information card that appears on submit of the form
+      const adInfo = document.createElement("li");
+      adInfo.innerHTML =
+        "Name: " +
+        value.name +
+        " <br>Number: " +
+        value.contact +
+        " <br>Address: " +
+        value.address +
+        " <br>Information: " +
+        adInput.value +
+        " <br>";
+      adInfo.classList.add("ad_info");
+
+      // remove button to delete the card
+      const trashButton = document.createElement("button");
+      trashButton.innerHTML = "Remove";
+      trashButton.classList.add("trash_button");
+
+      // append to empty list
+      adDiv.appendChild(adInfo);
+      adDiv.appendChild(trashButton);
+      adList.appendChild(adDiv);
+
+      // clear input
+      adInput.value = "";
+      adName.value = "";
+      adContact.value = "";
+      adAddress.value = "";
+      // increment session storage key
+      num++;
+    }
+    // Function to delete each individual information card
+    function deleteCheck(e) {
+      const item = e.target;
+      if (item.classList[0] === "trash_button") {
+        const parentItem = item.parentElement;
+        parentItem.remove();
+      }
+    }
+
+    function displayCards() {
+      if (num > 0) {
+        console.log("here");
+        for (const i in sessionStorage) {
+          // create cards to display to user
+          // create a Div that holds the li that would be created and the delete button
+          const newAdDiv = document.createElement("div");
+          newAdDiv.classList.add("new_ad");
+
+          // create li; it is the text area of the information card that appears on submit of the form
+          const adInfo = document.createElement("li");
+          adInfo.innerHTML =
+            "Name: " +
+            value.name +
+            " <br>Number: " +
+            value.contact +
+            " <br>Address: " +
+            value.address +
+            " <br>Information: " +
+            adInput.value +
+            " <br>";
+          adInfo.classList.add("new_ad_info");
+
+          // Create trash Button to delete the information card
+          const trashButton = document.createElement("button");
+          trashButton.innerHTML = "Remove";
+          trashButton.classList.add("new_trash_button");
+
+          // Append to  empty UL List
+          newAdDiv.appendChild(adInfo);
+          newAdDiv.appendChild(trashButton);
+          adList.appendChild(newAdDiv);
+        }
+      }
+    }
+  </script>
+</body>
 </html>
