@@ -285,37 +285,6 @@
           // Send data
           xhttp.send(JSON.stringify(req));
       }
-      profile.addEventListener('click', (e) =>{
-        //Create Request 
-        const xhttp = new XMLHttpRequest();
-
-        xhttp.open("POST", "users/posts", true);
-
-        xhttp.setRequestHeader("Accept", "application/json");
-        xhttp.setRequestHeader('Content-type', 'application/json');
-
-        xhttp.onload = function () {
-          //Get response from server
-          let res = JSON.parse(this.responseText)
-          //Clear all the posts on the page
-          clearPosts()
-          //Create JSON Objects from response
-          for (const [key, value] of Object.entries(res)){
-            //Add posts to feed
-            addPost(value); 
-          }
-          //Add other Eventlisteners 
-          incrementVote(); // Make votes able to increment
-          addPostEvent(); // Make comments show for the right post when clicked
-          }
-
-          let req = {
-            issue_type: hashtag,
-          }
-
-          // Send data
-          xhttp.send(JSON.stringify(req));
-      })
     </script>
 </body>
 </html>
