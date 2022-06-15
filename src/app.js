@@ -69,6 +69,10 @@ app.get('/donate', (req, res) => {
 app.get('/faq', (req, res) => {
   res.render('faq', { layout: './pages/_faq', title: 'FAQs' })
 })
+app.get('/login', (req, res) => {
+  res.render('login', { layout: './pages/_login', title: 'Login' })
+})
+// ----- end navigation routes -----
 
 app.get('/users',json_parser,(req,res) => {
    let db_res = users_query.select_users(pool);

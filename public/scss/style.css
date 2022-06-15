@@ -234,7 +234,7 @@ a {
 
 .wrapper {
   width: 50rem;
-  margin: auto;
+  margin: 2rem auto;
   border-radius: 1rem;
   height: auto;
   display: -webkit-box;
@@ -243,32 +243,31 @@ a {
 }
 
 #category {
-  width: 20%;
+  min-width: 25%;
   text-align: center;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
   border: 1px solid white;
   border-radius: 20px 0 0 20px;
 }
 
 .categories {
-  padding: 3rem;
+  padding: 2.5rem;
   border: 1px solid black;
   background-color: black;
   border-radius: 20px;
   height: 5px;
 }
 
+.categories.active,
 .categories:hover {
   cursor: pointer;
+  color: #C76E95;
 }
 
 #content {
   color: white;
   width: 100%;
-  background-color: darkcyan;
-  border-radius: 0 20px 20px 20px;
+  background-color: #708BD7;
+  border-radius: 0 20px 20px 0px;
 }
 
 #content_title {
@@ -299,27 +298,35 @@ a {
   transition: 0.25s;
 }
 
+textarea {
+  background-color: #4e77d774;
+}
+
 .form_box {
   width: 400px;
-  height: 480px;
+  height: 510px;
   position: relative;
   margin: 2% auto;
-  background: rgba(90, 89, 86, 0.3);
+  background: rgba(75, 79, 76, 0.3);
   padding: 10px;
   overflow: hidden;
+  border-radius: 20px;
 }
 
 .button_box {
-  width: 250px;
+  width: 279px;
+  height: 70px;
   margin: 35px auto;
   position: relative;
-  -webkit-box-shadow: 0 0 20px 9px #ff61241f;
-          box-shadow: 0 0 20px 9px #ff61241f;
+  -webkit-box-shadow: 0 0 20px 9px #75b97c1f;
+          box-shadow: 0 0 20px 9px #75b97c1f;
   border-radius: 30px;
+  text-align: center;
+  font-size: 2.2rem;
 }
 
 .toggle-btn {
-  padding: 5px 30px;
+  padding: 1px 35px;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -330,16 +337,15 @@ a {
 
 h6 {
   font-size: 1.2rem;
-  text-align: center;
 }
 
 #btn {
   top: 0;
   left: 0;
   position: absolute;
-  width: 55%;
+  width: 61%;
   height: 100%;
-  background: #F3C693;
+  background: #56b55e;
   border-radius: 30px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -349,16 +355,16 @@ h6 {
   top: 150px;
   position: absolute;
   width: 280px;
-  -webkit-transition: .5s;
-  transition: .5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .input_signup {
   top: 120px;
   position: absolute;
   width: 280px;
-  -webkit-transition: .5s;
-  transition: .5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .input {
@@ -383,7 +389,7 @@ h6 {
   cursor: pointer;
   display: block;
   margin: auto;
-  background: #F3C693;
+  background: #72bc78;
   border: 0;
   outline: none;
   border-radius: 30px;
@@ -394,16 +400,9 @@ h6 {
 
 .submit_button:hover {
   color: white;
-  border: 2px solid #F3C693;
-  background-color: #F3C693;
+  border: 2px solid #56b55e;
+  background-color: #56b55e;
   cursor: pointer;
-}
-
-span {
-  color: black;
-  font-size: 12px;
-  bottom: 68px;
-  position: absolute;
 }
 
 #login {

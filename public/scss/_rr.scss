@@ -1,46 +1,53 @@
-.wrapper{
-    width: 50rem;
-    margin: auto;
-    border-radius: 1rem;
-    height: auto;
-    display: flex;
+.wrapper {
+  width: 50rem;
+  margin: 2rem auto;
+  border-radius: 1rem;
+  height: auto;
+  display: flex;
 }
-#category{
-    width: 20%;
-    text-align: center;
-    height: fit-content;
-    border: 1px solid white;
-    border-radius: 20px 0 0 20px;
-}
-.categories{
-    padding: 3rem;
-    border: 1px solid black;
-    background-color: black;
-    border-radius: 20px;
-    height: 5px;
-}
-.categories:hover{
-    cursor: pointer;
-}
-#content{
-    color: white;
-    width: 100%;
-    background-color: darkcyan;
-    border-radius: 0 20px 20px 20px;
 
+#category {
+  min-width: 25%;
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 20px 0 0 20px;
 }
-#content_title{
-    text-align: center;
-    padding: 30px;
+
+.categories {
+  padding: 2.5rem;
+  border: 1px solid black;
+  background-color: black;
+  border-radius: 20px;
+  height: 5px;
 }
-#form_info{
+
+.categories.active,
+.categories:hover {
+  cursor: pointer;
+  color: #C76E95;
+}
+
+#content {
+  color: white;
+  width: 100%;
+  background-color: #708BD7;
+  border-radius: 0 20px 20px 0px;
+}
+
+#content_title {
+  text-align: center;
+  padding: 30px;
+}
+
+#form_info {
   text-align: center;
   color: black;
   border-radius: 1rem;
   padding: 3rem;
   margin: auto;
 }
-#form_info input{
+
+#form_info input {
   border: 2px solid white;
   background: none;
   display: block;
@@ -52,4 +59,8 @@
   outline: none;
   color: black;
   transition: 0.25s;
+}
+
+textarea {
+  background-color: #4e77d774;
 }
