@@ -41,7 +41,6 @@ function report_err(err,res,msg){
 
 function db_resolve(db_res,express_res){
    db_res.then(rows =>{
-      console.log(rows.data);
       express_res.send(JSON.stringify(rows.data));
       rows.client.release();
    })
@@ -137,9 +136,10 @@ app.post('/issues',json_parser,(req,res) => {
    db_resolve(db_res,res);
 });
 
-app.post('/issues/all',(req,res) => {
-   let db_res = issues_query.select_issues(pool);
-   db_resolve(db_res,res);
+app.post('/issues/all',json_parser,(req,res) => {
+  console.log(req.body);
+  let db_res = issues_query.select_issues(pool);
+  db_resolve(db_res,res);
 })
 app.delete('/issues',json_parser,(req,res) =>{
    let issue = {
@@ -178,7 +178,6 @@ app.get('/votes',json_parser,(req,res) => {
      creator_id: req.body.creator_id, 
      asignee_id: req.body.asignee_id 
    }; 
-
    let db_res = issues_query.count_votes(pool,issue);
    db_resolve(db_res,res);
 });

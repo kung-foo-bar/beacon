@@ -107,6 +107,7 @@
       let crimeFilterButton = document.getElementById("crime_filter");
       let filterButtons = document.querySelectorAll(".filterButtons");
       let home = document.getElementById("home");
+      let hashtag
 
       //Feed section
       let userName = document.querySelectorAll(".user_name");
@@ -131,7 +132,7 @@
       filterButtons.forEach(filterButton =>{ 
         filterButton.addEventListener('click', (e)=>{
           //hashtag to be Queried for
-          let hashtag = filterButton.id; // Gets the id of the button that was clicked
+          hashtag = filterButton.id; // Gets the id of the button that was clicked
           filterIssues();
         })
       })
@@ -146,8 +147,8 @@
 
         xhttp.setRequestHeader("Accept", "application/json");
         xhttp.setRequestHeader('Content-type', 'application/json');
+        
         xhttp.onload = function () {
-          console.log()
           let res = this.response;
           feed.innerHTML += `
           <div class='post'>
@@ -238,8 +239,8 @@
 
         // Request object to be sent to server
         let req = {
-          category: "load",
-        }
+            issue_type: "catch",
+          }
         // Send Request
         xhttp.send(JSON.stringify(req));
       }
@@ -255,7 +256,6 @@
         xhttp.onload = function () {
           //Get response from server
           let res = JSON.parse(this.responseText)
-          // console.log(res)
           //Clear all the posts on the page
           clearPosts()
           //Create JSON Objects from response
