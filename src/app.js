@@ -140,7 +140,6 @@ app.post('/issues',json_parser,(req,res) => {
 });
 
 app.post('/issues/all',json_parser,(req,res) => {
-  console.log(req.body);
   let db_res = issues_query.select_issues(pool);
   db_resolve(db_res,res);
 })
