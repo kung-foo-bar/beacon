@@ -118,15 +118,34 @@ h1 {
     text-align: center;
 }
 
+a {
+    color: white;
+}
+
+a:hover {
+    color: black;
+}
+
+.click-button:focus {
+    border-color: aliceblue;
+}
+
 .click-button {
     width: 60%;
     padding: 15px 30px;
     cursor: pointer;
     display: block;
     margin: auto;
-    background: #72bc78;
-    border: 0;
+    background: rgb(85, 85, 189);
+    border: 2px solid white;
     outline: none;
     border-radius: 30px;
     margin-top: 20px;
+}
+
+.click_button:hover {
+    color: white;
+    border: 2px solid rgb(85, 85, 189);
+    background-color: rgb(85, 85, 189);
+    cursor: pointer;
 }

@@ -3,57 +3,28 @@
     height: 510px;
     position: relative;
     margin: 2% auto;
-    background: rgba(75, 79, 76, 0.3);
+    background: rgba(75, 76, 79, 0.3);
     padding: 10px;
     overflow: hidden;
     border-radius: 20px;
 }
 
-.button_box {
-    width: 279px;
-    height: 70px;
-    margin: 35px auto;
-    position: relative;
-    box-shadow: 0 0 20px 9px #75b97c1f;
-    border-radius: 30px;
+.add-acc {
     text-align: center;
-    font-size: 2.2rem;
-}
-
-.toggle-btn {
-    padding: 1px 35px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: none;
-    position: relative;
+    text-transform: uppercase;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: white;
 }
 
 h6 {
-    font-size: 1.2rem;
-}
-
-#btn {
-    top: 0;
-    left: 0;
-    position: absolute;
-    width: 61%;
-    height: 100%;
-    background: #56b55e;
-    border-radius: 30px;
-    transition: 0.5s;
+    font-size: 3rem;
 }
 
 .input_login {
     top: 150px;
-    position: absolute;
-    width: 280px;
-    transition: 0.5s;
-}
-
-.input_signup {
-    top: 120px;
     position: absolute;
     width: 280px;
     transition: 0.5s;
@@ -81,19 +52,20 @@ h6 {
     cursor: pointer;
     display: block;
     margin: auto;
-    background: #72bc78;
-    border: 0;
+    background: rgb(85, 85, 189);
+    border: 2px solid white;
     outline: none;
     border-radius: 30px;
     margin-top: 20px;
     -webkit-transition: 0.25s;
     transition: 0.25s;
+    color: white;
 }
 
 .submit_button:hover {
-    color: white;
-    border: 2px solid #56b55e;
-    background-color: #56b55e;
+    color: black;
+    border: 2px solid white;
+    background-color: rgb(85, 85, 189);
     cursor: pointer;
 }
 
@@ -102,15 +74,6 @@ h6 {
 }
 
 #login input {
-    color: white;
-    font-size: 15;
-}
-
-#signup {
-    left: 450px;
-}
-
-#signup input {
     color: white;
     font-size: 15;
 }
