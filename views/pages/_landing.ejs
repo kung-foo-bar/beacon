@@ -145,7 +145,11 @@
                 <p class="category">${obj.title}</p>
             </div>
             <div class="post_main">
-                <p>${obj.msg}</p>
+                <div class="test">
+                  <img class="post_img" src="img/workInProgress.jpg">
+                  <p>${obj.msg}</p>
+                </div>
+                
             </div>
             <div class="post_footer">
                 <p class="votes">${res}</p>
@@ -268,6 +272,7 @@
             issue_type: hashtag,
           }
 
+          console.log(req)
           // Send data
           xhttp.send(JSON.stringify(req));
       }
