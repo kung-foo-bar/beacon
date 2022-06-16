@@ -422,4 +422,162 @@ h6 {
   color: white;
   font-size: 15;
 }
+
+.about-box {
+  width: 100%;
+  height: 70vh;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.card {
+  width: 80%;
+  height: 500px;
+  -webkit-box-shadow: 0 0 40px 20px rgba(40, 74, 49, 0.26);
+          box-shadow: 0 0 40px 20px rgba(40, 74, 49, 0.26);
+}
+
+.inner-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-front,
+.card-back {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(232, 238, 233, 0.3)), to(rgba(224, 238, 228, 0.3))), url("https://www.aptouring.com/-/media/apt-responsive-website/australia/queensland/hero-panel-12-5/hc-a-au-qld-cape-york-tip-146826446-g-rf-edit-lighter-12-5.jpg?useCustomFunctions=1&rw=2280&w=1900&h=950&cropX=190&cropY=0");
+  background-image: linear-gradient(rgba(232, 238, 233, 0.3), rgba(224, 238, 228, 0.3)), url("https://www.aptouring.com/-/media/apt-responsive-website/australia/queensland/hero-panel-12-5/hc-a-au-qld-cape-york-tip-146826446-g-rf-edit-lighter-12-5.jpg?useCustomFunctions=1&rw=2280&w=1900&h=950&cropX=190&cropY=0");
+  padding: 55px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.card-back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+h4 {
+  text-transform: uppercase;
+  font-size: 50px;
+  color: black;
+}
+
+h5 {
+  font-size: 22px;
+  color: black;
+}
+
+.boxes {
+  width: 90%;
+  margin: auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(250px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.box1,
+.box2,
+.box3 {
+  height: 350px;
+  color: white;
+  border: 1px solid white;
+  position: relative;
+  border-radius: 10px;
+}
+
+.box1 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(232, 238, 233, 0.3)), to(rgba(224, 238, 228, 0.3))), url("https://web-static.wrike.com/cdn-cgi/image/width=900,format=auto/blog/content/uploads/2016/05/How-to-Build-Your-First-Wrike-Request-Form.jpg?av=5a514c59e799b0de20e021c19c3ecac1");
+  background-image: linear-gradient(rgba(232, 238, 233, 0.3), rgba(224, 238, 228, 0.3)), url("https://web-static.wrike.com/cdn-cgi/image/width=900,format=auto/blog/content/uploads/2016/05/How-to-Build-Your-First-Wrike-Request-Form.jpg?av=5a514c59e799b0de20e021c19c3ecac1");
+  padding: 55px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.box2 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(232, 238, 233, 0.3)), to(rgba(224, 238, 228, 0.3))), url("https://img.freepik.com/free-photo/shopping-online-shopping-cart-trolley-laptop-keyboard-shopping-service-online-web-offers-home-delivery_9635-4159.jpg?w=2000");
+  background-image: linear-gradient(rgba(232, 238, 233, 0.3), rgba(224, 238, 228, 0.3)), url("https://img.freepik.com/free-photo/shopping-online-shopping-cart-trolley-laptop-keyboard-shopping-service-online-web-offers-home-delivery_9635-4159.jpg?w=2000");
+  padding: 55px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.box3 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(232, 238, 233, 0.3)), to(rgba(224, 238, 228, 0.3))), url("https://www.gannett-cdn.com/-mm-/3b8b0abcb585d9841e5193c3d072eed1e5ce62bc/c=0-30-580-356/local/-/media/2017/10/05/USATODAY/usatsports/glass-jar-full-of-cois-with-donate-written-on-it-charity-donation-philanthropy_large.jpg?width=1200&disable=upscale&format=pjpg&auto=webp");
+  background-image: linear-gradient(rgba(232, 238, 233, 0.3), rgba(224, 238, 228, 0.3)), url("https://www.gannett-cdn.com/-mm-/3b8b0abcb585d9841e5193c3d072eed1e5ce62bc/c=0-30-580-356/local/-/media/2017/10/05/USATODAY/usatsports/glass-jar-full-of-cois-with-donate-written-on-it-charity-donation-philanthropy_large.jpg?width=1200&disable=upscale&format=pjpg&auto=webp");
+  padding: 55px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+h3 {
+  text-transform: uppercase;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: black;
+}
+
+h1 {
+  color: black;
+  margin-top: 15%;
+  font-size: 25px;
+  text-align: center;
+}
+
+.click-button {
+  width: 60%;
+  padding: 15px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: #72bc78;
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+  margin-top: 20px;
+}
 /*# sourceMappingURL=style.css.map */
